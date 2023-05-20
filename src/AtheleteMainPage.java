@@ -27,8 +27,8 @@ public class AtheleteMainPage extends javax.swing.JFrame {
     public AtheleteMainPage() {
         initComponents();
         setColor(homeButton); 
-        ind_1.setOpaque(true);
-        resetColor(new JPanel[]{inventoryButton}, new JPanel[]{ind_3});
+        idnHomeButton.setOpaque(true);
+        resetColor(new JPanel[]{inventoryButton}, new JPanel[]{idnInventoryButton});
         times();
         dt();
     }
@@ -73,19 +73,6 @@ public class AtheleteMainPage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        side_pane = new javax.swing.JPanel();
-        homeButton = new javax.swing.JPanel();
-        ind_1 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        inventoryButton = new javax.swing.JPanel();
-        ind_3 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        topPane = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        dayLabel = new javax.swing.JLabel();
-        dateLabel = new javax.swing.JLabel();
-        timeLabel = new javax.swing.JLabel();
         infoPane = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         adminName = new javax.swing.JLabel();
@@ -96,175 +83,24 @@ public class AtheleteMainPage extends javax.swing.JFrame {
         tablePane = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        side_panel = new javax.swing.JPanel();
+        homeButton = new javax.swing.JPanel();
+        idnHomeButton = new javax.swing.JPanel();
+        homeButtonText = new javax.swing.JLabel();
+        inventoryButton = new javax.swing.JPanel();
+        idnInventoryButton = new javax.swing.JPanel();
+        inventorytext = new javax.swing.JLabel();
+        topPane = new javax.swing.JPanel();
+        jTextField1 = new javax.swing.JTextField();
+        dayLabel = new javax.swing.JLabel();
+        dateLabel = new javax.swing.JLabel();
+        timeLabel = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        side_pane.setBackground(new java.awt.Color(0, 153, 0));
-        side_pane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        homeButton.setBackground(new java.awt.Color(23, 35, 51));
-        homeButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                homeButtonMousePressed(evt);
-            }
-        });
-
-        ind_1.setOpaque(false);
-        ind_1.setPreferredSize(new java.awt.Dimension(3, 43));
-
-        javax.swing.GroupLayout ind_1Layout = new javax.swing.GroupLayout(ind_1);
-        ind_1.setLayout(ind_1Layout);
-        ind_1Layout.setHorizontalGroup(
-            ind_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 3, Short.MAX_VALUE)
-        );
-        ind_1Layout.setVerticalGroup(
-            ind_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 43, Short.MAX_VALUE)
-        );
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Home");
-
-        javax.swing.GroupLayout homeButtonLayout = new javax.swing.GroupLayout(homeButton);
-        homeButton.setLayout(homeButtonLayout);
-        homeButtonLayout.setHorizontalGroup(
-            homeButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(homeButtonLayout.createSequentialGroup()
-                .addComponent(ind_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(jLabel8)
-                .addGap(0, 48, Short.MAX_VALUE))
-        );
-        homeButtonLayout.setVerticalGroup(
-            homeButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(homeButtonLayout.createSequentialGroup()
-                .addComponent(ind_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(homeButtonLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        side_pane.add(homeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 120, -1));
-
-        inventoryButton.setBackground(new java.awt.Color(23, 35, 51));
-        inventoryButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                inventoryButtonMousePressed(evt);
-            }
-        });
-
-        ind_3.setOpaque(false);
-        ind_3.setPreferredSize(new java.awt.Dimension(3, 43));
-
-        javax.swing.GroupLayout ind_3Layout = new javax.swing.GroupLayout(ind_3);
-        ind_3.setLayout(ind_3Layout);
-        ind_3Layout.setHorizontalGroup(
-            ind_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 3, Short.MAX_VALUE)
-        );
-        ind_3Layout.setVerticalGroup(
-            ind_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 43, Short.MAX_VALUE)
-        );
-
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Inventory");
-
-        javax.swing.GroupLayout inventoryButtonLayout = new javax.swing.GroupLayout(inventoryButton);
-        inventoryButton.setLayout(inventoryButtonLayout);
-        inventoryButtonLayout.setHorizontalGroup(
-            inventoryButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(inventoryButtonLayout.createSequentialGroup()
-                .addComponent(ind_3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(jLabel10)
-                .addGap(0, 30, Short.MAX_VALUE))
-        );
-        inventoryButtonLayout.setVerticalGroup(
-            inventoryButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(inventoryButtonLayout.createSequentialGroup()
-                .addComponent(ind_3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(inventoryButtonLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        side_pane.add(inventoryButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 120, -1));
-
-        topPane.setBackground(new java.awt.Color(51, 204, 0));
-        topPane.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                topPaneMouseDragged(evt);
-            }
-        });
-        topPane.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                topPaneMousePressed(evt);
-            }
-        });
-
-        jTextField1.setBackground(new java.awt.Color(204, 255, 204));
-        jTextField1.setBorder(null);
-        jTextField1.setCaretColor(new java.awt.Color(255, 255, 255));
-        jTextField1.setPreferredSize(new java.awt.Dimension(2, 20));
-
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/swing/images/icons8_Search_18px.png"))); // NOI18N
-
-        dayLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        dayLabel.setForeground(new java.awt.Color(255, 255, 255));
-        dayLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        dayLabel.setText("day");
-
-        dateLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        dateLabel.setForeground(new java.awt.Color(255, 255, 255));
-        dateLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        dateLabel.setText("date");
-
-        timeLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 36)); // NOI18N
-        timeLabel.setForeground(new java.awt.Color(255, 255, 255));
-        timeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        timeLabel.setText("time");
-
-        javax.swing.GroupLayout topPaneLayout = new javax.swing.GroupLayout(topPane);
-        topPane.setLayout(topPaneLayout);
-        topPaneLayout.setHorizontalGroup(
-            topPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topPaneLayout.createSequentialGroup()
-                .addComponent(dayLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(dateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(timeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel7)
-                .addContainerGap())
-        );
-        topPaneLayout.setVerticalGroup(
-            topPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(topPaneLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(topPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topPaneLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(topPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(topPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(dayLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(dateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(topPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(timeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap())
-        );
+        setPreferredSize(new java.awt.Dimension(960, 540));
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         infoPane.setBackground(new java.awt.Color(51, 204, 0));
 
@@ -278,7 +114,7 @@ public class AtheleteMainPage extends javax.swing.JFrame {
 
         adminTItile.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         adminTItile.setForeground(new java.awt.Color(255, 255, 255));
-        adminTItile.setText("Cohort 3 - CECS");
+        adminTItile.setText("Cohort 3 CECS");
         jPanel4.add(adminTItile, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, -1, -1));
 
         StyledDocument doc = jTextPane1.getStyledDocument();
@@ -287,7 +123,7 @@ public class AtheleteMainPage extends javax.swing.JFrame {
         doc.setParagraphAttributes(0, doc.getLength(), center, false);
         jTextPane1.setEditable(false);
         jTextPane1.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
-        jTextPane1.setText("1. \nBadminton Racket\nLate: 3 days 2 hours\n\n2.\nBadminton Racket\nLate: 3 days 2 hours\n\n3.\nBadminton Racket\nLate: 3 days 2 hours\n\n// sort ascending in due time\n// change the text if notified by the admin");
+        jTextPane1.setText("1. \nBadminton Racket\nLate: 3 days 2 hours\nNguyen Don The Kiet \n\n2.\nBadminton Racket\nLate: 3 days 2 hours\nNguyen Don The Kiet\n\n3.\nBadminton Racket\nLate: 3 days 2 hours\nNguyen Don The Kiet \n");
         jScrollPane3.setViewportView(jTextPane1);
 
         jButton1.setText("Return Selected Items");
@@ -300,24 +136,30 @@ public class AtheleteMainPage extends javax.swing.JFrame {
                 .addGroup(infoPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(infoPaneLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(40, 40, 40)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, infoPaneLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48))
+            .addGroup(infoPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(infoPaneLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(14, Short.MAX_VALUE)))
         );
         infoPaneLayout.setVerticalGroup(
             infoPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(infoPaneLayout.createSequentialGroup()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 348, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23))
+                .addContainerGap())
+            .addGroup(infoPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(infoPaneLayout.createSequentialGroup()
+                    .addGap(97, 97, 97)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(65, Short.MAX_VALUE)))
         );
+
+        getContentPane().add(infoPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 260, -1));
 
         tablePane.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -389,53 +231,216 @@ public class AtheleteMainPage extends javax.swing.JFrame {
         tablePaneLayout.setHorizontalGroup(
             tablePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tablePaneLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 574, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 6, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
+                .addContainerGap())
         );
         tablePaneLayout.setVerticalGroup(
             tablePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(side_pane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 840, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 119, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(topPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(infoPane, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, 0)
-                            .addComponent(tablePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(0, 1, Short.MAX_VALUE)))
+        getContentPane().add(tablePane, new org.netbeans.lib.awtextra.AbsoluteConstraints(386, 55, 580, 480));
+
+        side_panel.setBackground(new java.awt.Color(0, 153, 0));
+        side_panel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        homeButton.setBackground(new java.awt.Color(23, 35, 51));
+        homeButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                homeButtonMousePressed(evt);
+            }
+        });
+
+        idnHomeButton.setOpaque(false);
+        idnHomeButton.setPreferredSize(new java.awt.Dimension(3, 43));
+
+        javax.swing.GroupLayout idnHomeButtonLayout = new javax.swing.GroupLayout(idnHomeButton);
+        idnHomeButton.setLayout(idnHomeButtonLayout);
+        idnHomeButtonLayout.setHorizontalGroup(
+            idnHomeButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 3, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(side_pane, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(topPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(infoPane, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(tablePane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        idnHomeButtonLayout.setVerticalGroup(
+            idnHomeButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 43, Short.MAX_VALUE)
         );
+
+        homeButtonText.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        homeButtonText.setForeground(new java.awt.Color(255, 255, 255));
+        homeButtonText.setText("Home");
+
+        javax.swing.GroupLayout homeButtonLayout = new javax.swing.GroupLayout(homeButton);
+        homeButton.setLayout(homeButtonLayout);
+        homeButtonLayout.setHorizontalGroup(
+            homeButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(homeButtonLayout.createSequentialGroup()
+                .addComponent(idnHomeButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addComponent(homeButtonText)
+                .addGap(0, 48, Short.MAX_VALUE))
+        );
+        homeButtonLayout.setVerticalGroup(
+            homeButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(homeButtonLayout.createSequentialGroup()
+                .addComponent(idnHomeButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(homeButtonLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(homeButtonText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        side_panel.add(homeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 120, -1));
+
+        inventoryButton.setBackground(new java.awt.Color(23, 35, 51));
+        inventoryButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                inventoryButtonMousePressed(evt);
+            }
+        });
+
+        idnInventoryButton.setOpaque(false);
+        idnInventoryButton.setPreferredSize(new java.awt.Dimension(3, 43));
+
+        javax.swing.GroupLayout idnInventoryButtonLayout = new javax.swing.GroupLayout(idnInventoryButton);
+        idnInventoryButton.setLayout(idnInventoryButtonLayout);
+        idnInventoryButtonLayout.setHorizontalGroup(
+            idnInventoryButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 3, Short.MAX_VALUE)
+        );
+        idnInventoryButtonLayout.setVerticalGroup(
+            idnInventoryButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 43, Short.MAX_VALUE)
+        );
+
+        inventorytext.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        inventorytext.setForeground(new java.awt.Color(255, 255, 255));
+        inventorytext.setText("Inventory");
+
+        javax.swing.GroupLayout inventoryButtonLayout = new javax.swing.GroupLayout(inventoryButton);
+        inventoryButton.setLayout(inventoryButtonLayout);
+        inventoryButtonLayout.setHorizontalGroup(
+            inventoryButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(inventoryButtonLayout.createSequentialGroup()
+                .addComponent(idnInventoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addComponent(inventorytext)
+                .addGap(0, 30, Short.MAX_VALUE))
+        );
+        inventoryButtonLayout.setVerticalGroup(
+            inventoryButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(inventoryButtonLayout.createSequentialGroup()
+                .addComponent(idnInventoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(inventoryButtonLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(inventorytext, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        side_panel.add(inventoryButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 120, -1));
+
+        getContentPane().add(side_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 540));
+
+        topPane.setBackground(new java.awt.Color(51, 204, 0));
+        topPane.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                topPaneMouseDragged(evt);
+            }
+        });
+        topPane.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                topPaneMousePressed(evt);
+            }
+        });
+
+        jTextField1.setBackground(new java.awt.Color(204, 255, 204));
+        jTextField1.setBorder(null);
+        jTextField1.setCaretColor(new java.awt.Color(255, 255, 255));
+        jTextField1.setPreferredSize(new java.awt.Dimension(2, 20));
+
+        dayLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        dayLabel.setForeground(new java.awt.Color(255, 255, 255));
+        dayLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        dayLabel.setText("day");
+
+        dateLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        dateLabel.setForeground(new java.awt.Color(255, 255, 255));
+        dateLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        dateLabel.setText("date");
+
+        timeLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 36)); // NOI18N
+        timeLabel.setForeground(new java.awt.Color(255, 255, 255));
+        timeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        timeLabel.setText("time");
+
+        jButton2.setBackground(new java.awt.Color(51, 204, 0));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/swing/images/icons8_Search_18px.png"))); // NOI18N
+        jButton2.setBorderPainted(false);
+        jButton2.setMaximumSize(new java.awt.Dimension(40, 40));
+        jButton2.setMinimumSize(new java.awt.Dimension(40, 40));
+        jButton2.setSize(new java.awt.Dimension(40, 40));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout topPaneLayout = new javax.swing.GroupLayout(topPane);
+        topPane.setLayout(topPaneLayout);
+        topPaneLayout.setHorizontalGroup(
+            topPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topPaneLayout.createSequentialGroup()
+                .addComponent(dayLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(dateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(timeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+                .addGap(36, 36, 36)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        topPaneLayout.setVerticalGroup(
+            topPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(topPaneLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topPaneLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(topPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(topPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(timeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGroup(topPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(dayLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap())
+        );
+
+        getContentPane().add(topPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 840, 50));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    int xx,xy;
     private void homeButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeButtonMousePressed
         // TODO add your handling code here:
         setColor(homeButton);
-        ind_1.setOpaque(true);
-        resetColor(new JPanel[]{inventoryButton}, new JPanel[]{ind_3});
+        idnHomeButton.setOpaque(true);
+        resetColor(new JPanel[]{inventoryButton}, new JPanel[]{idnInventoryButton});
     }//GEN-LAST:event_homeButtonMousePressed
+
+    private void inventoryButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inventoryButtonMousePressed
+        // TODO add your handling code here:
+        setColor(inventoryButton);
+        idnInventoryButton.setOpaque(true);
+        resetColor(new JPanel[]{homeButton}, new JPanel[]{idnHomeButton});
+    }//GEN-LAST:event_inventoryButtonMousePressed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void topPaneMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topPaneMouseDragged
         // TODO add your handling code here:
@@ -445,19 +450,13 @@ public class AtheleteMainPage extends javax.swing.JFrame {
         int y = evt.getYOnScreen();
         this.setLocation(x-xx,y-xy);
     }//GEN-LAST:event_topPaneMouseDragged
-    int xx,xy;
+
     private void topPaneMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topPaneMousePressed
         // TODO add your handling code here:
         //drag this pane
         xx = evt.getX();
         xy = evt.getY();
     }//GEN-LAST:event_topPaneMousePressed
-
-    private void inventoryButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inventoryButtonMousePressed
-       setColor(inventoryButton); 
-        ind_3.setOpaque(true);
-        resetColor(new JPanel[]{homeButton}, new JPanel[]{ind_1});
-    }//GEN-LAST:event_inventoryButtonMousePressed
 
     /**
      * @param args the command line arguments
@@ -500,21 +499,21 @@ public class AtheleteMainPage extends javax.swing.JFrame {
     private javax.swing.JLabel dateLabel;
     private javax.swing.JLabel dayLabel;
     private javax.swing.JPanel homeButton;
-    private javax.swing.JPanel ind_1;
-    private javax.swing.JPanel ind_3;
+    private javax.swing.JLabel homeButtonText;
+    private javax.swing.JPanel idnHomeButton;
+    private javax.swing.JPanel idnInventoryButton;
     private javax.swing.JPanel infoPane;
     private javax.swing.JPanel inventoryButton;
+    private javax.swing.JLabel inventorytext;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
+    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextPane jTextPane1;
-    private javax.swing.JPanel side_pane;
+    private javax.swing.JPanel side_panel;
     private javax.swing.JPanel tablePane;
     private javax.swing.JLabel timeLabel;
     private javax.swing.JPanel topPane;
