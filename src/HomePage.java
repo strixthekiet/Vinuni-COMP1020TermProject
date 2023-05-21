@@ -173,10 +173,17 @@ public class HomePage extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(null, "Username doesnt exist");
         }
+        else if(passwordFIeld.getText().contains("1"))
+        {
+            super.dispose();
+            AdminMainPage adminMainPage = new AdminMainPage();
+            adminMainPage.setVisible(true);           
+        }
         else if(!passwordFIeld.getText().contains("0"))
         {
             JOptionPane.showMessageDialog(null, "Wrong Password", "WTF?", JOptionPane.ERROR_MESSAGE);
         }
+        
         else
         {
             super.dispose();

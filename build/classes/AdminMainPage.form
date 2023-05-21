@@ -54,6 +54,7 @@
           </Properties>
           <Events>
             <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="homeButtonMousePressed"/>
+            <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="homeButtonMouseReleased"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -299,9 +300,9 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="timeLabel" pref="350" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                  <Component id="jTextField1" min="-2" pref="141" max="-2" attributes="0"/>
+                  <Component id="searchText" min="-2" pref="141" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jButton2" min="-2" pref="41" max="-2" attributes="0"/>
+                  <Component id="searchButton" min="-2" pref="41" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -309,13 +310,13 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                  <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
+                  <Component id="searchText" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="jButton2" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="searchButton" min="-2" pref="40" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="timeLabel" pref="0" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -330,7 +331,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JTextField" name="jTextField1">
+        <Component class="javax.swing.JTextField" name="searchText">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="cc" green="ff" red="cc" type="rgb"/>
@@ -345,6 +346,9 @@
               <Dimension value="[2, 20]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchTextActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="dayLabel">
           <Properties>
@@ -382,7 +386,7 @@
             <Property name="text" type="java.lang.String" value="time"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton2">
+        <Component class="javax.swing.JButton" name="searchButton">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="cc" red="33" type="rgb"/>
@@ -402,7 +406,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchButtonActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -427,7 +431,7 @@
                       <Component id="jPanel4" min="-2" pref="260" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                          <Component id="jButton1" min="-2" pref="180" max="-2" attributes="0"/>
+                          <Component id="jobButton" min="-2" pref="180" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -446,7 +450,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jPanel4" min="-2" pref="91" max="-2" attributes="0"/>
                   <EmptySpace pref="348" max="32767" attributes="0"/>
-                  <Component id="jButton1" min="-2" pref="45" max="-2" attributes="0"/>
+                  <Component id="jobButton" min="-2" pref="45" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
@@ -526,7 +530,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="jobButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Return Selected Items"/>
           </Properties>
@@ -578,7 +582,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="jTable1">
+            <Component class="javax.swing.JTable" name="mainTable">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="12" style="0"/>

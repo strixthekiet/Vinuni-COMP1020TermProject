@@ -5,7 +5,11 @@ import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JPanel;
+import javax.swing.RowFilter;
 import javax.swing.Timer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
@@ -29,6 +33,7 @@ public class AtheleteMainPage extends javax.swing.JFrame {
         setColor(homeButton); 
         idnHomeButton.setOpaque(true);
         resetColor(new JPanel[]{inventoryButton}, new JPanel[]{idnInventoryButton});
+        jobButton.setForeground(Color.orange);
         times();
         dt();
     }
@@ -79,10 +84,10 @@ public class AtheleteMainPage extends javax.swing.JFrame {
         adminTItile = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
-        jButton1 = new javax.swing.JButton();
+        jobButton = new javax.swing.JButton();
         tablePane = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        mainTable = new javax.swing.JTable();
         side_panel = new javax.swing.JPanel();
         homeButton = new javax.swing.JPanel();
         idnHomeButton = new javax.swing.JPanel();
@@ -91,14 +96,13 @@ public class AtheleteMainPage extends javax.swing.JFrame {
         idnInventoryButton = new javax.swing.JPanel();
         inventorytext = new javax.swing.JLabel();
         topPane = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        searchText = new javax.swing.JTextField();
         dayLabel = new javax.swing.JLabel();
         dateLabel = new javax.swing.JLabel();
         timeLabel = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        searchButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(960, 540));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -126,7 +130,7 @@ public class AtheleteMainPage extends javax.swing.JFrame {
         jTextPane1.setText("1. \nBadminton Racket\nLate: 3 days 2 hours\nNguyen Don The Kiet \n\n2.\nBadminton Racket\nLate: 3 days 2 hours\nNguyen Don The Kiet\n\n3.\nBadminton Racket\nLate: 3 days 2 hours\nNguyen Don The Kiet \n");
         jScrollPane3.setViewportView(jTextPane1);
 
-        jButton1.setText("Return Selected Items");
+        jobButton.setText("Return Selected Items");
 
         javax.swing.GroupLayout infoPaneLayout = new javax.swing.GroupLayout(infoPane);
         infoPane.setLayout(infoPaneLayout);
@@ -137,7 +141,7 @@ public class AtheleteMainPage extends javax.swing.JFrame {
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(infoPaneLayout.createSequentialGroup()
                         .addGap(40, 40, 40)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jobButton, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(infoPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(infoPaneLayout.createSequentialGroup()
@@ -150,7 +154,7 @@ public class AtheleteMainPage extends javax.swing.JFrame {
             .addGroup(infoPaneLayout.createSequentialGroup()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 348, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jobButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(infoPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(infoPaneLayout.createSequentialGroup()
@@ -165,8 +169,8 @@ public class AtheleteMainPage extends javax.swing.JFrame {
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
 
-        jTable1.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        mainTable.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        mainTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 { new Integer(1), "racket", "13:45 13/05", "3 days", "13:45 16/05", "100% new"},
                 { new Integer(2), "Football ball", "14:10 10/05", "1 week", "14:10 17/05", null},
@@ -221,10 +225,10 @@ public class AtheleteMainPage extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jTable1.setGridColor(new java.awt.Color(255, 255, 255));
-        jTable1.setRowHeight(22);
-        jTable1.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-        jScrollPane1.setViewportView(jTable1);
+        mainTable.setGridColor(new java.awt.Color(255, 255, 255));
+        mainTable.setRowHeight(22);
+        mainTable.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        jScrollPane1.setViewportView(mainTable);
 
         javax.swing.GroupLayout tablePaneLayout = new javax.swing.GroupLayout(tablePane);
         tablePane.setLayout(tablePaneLayout);
@@ -354,10 +358,10 @@ public class AtheleteMainPage extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setBackground(new java.awt.Color(204, 255, 204));
-        jTextField1.setBorder(null);
-        jTextField1.setCaretColor(new java.awt.Color(255, 255, 255));
-        jTextField1.setPreferredSize(new java.awt.Dimension(2, 20));
+        searchText.setBackground(new java.awt.Color(204, 255, 204));
+        searchText.setBorder(null);
+        searchText.setCaretColor(new java.awt.Color(255, 255, 255));
+        searchText.setPreferredSize(new java.awt.Dimension(2, 20));
 
         dayLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         dayLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -374,15 +378,15 @@ public class AtheleteMainPage extends javax.swing.JFrame {
         timeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         timeLabel.setText("time");
 
-        jButton2.setBackground(new java.awt.Color(51, 204, 0));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/swing/images/icons8_Search_18px.png"))); // NOI18N
-        jButton2.setBorderPainted(false);
-        jButton2.setMaximumSize(new java.awt.Dimension(40, 40));
-        jButton2.setMinimumSize(new java.awt.Dimension(40, 40));
-        jButton2.setSize(new java.awt.Dimension(40, 40));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        searchButton.setBackground(new java.awt.Color(51, 204, 0));
+        searchButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/swing/images/icons8_Search_18px.png"))); // NOI18N
+        searchButton.setBorderPainted(false);
+        searchButton.setMaximumSize(new java.awt.Dimension(40, 40));
+        searchButton.setMinimumSize(new java.awt.Dimension(40, 40));
+        searchButton.setSize(new java.awt.Dimension(40, 40));
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                searchButtonActionPerformed(evt);
             }
         });
 
@@ -397,20 +401,20 @@ public class AtheleteMainPage extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(timeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
                 .addGap(36, 36, 36)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(searchText, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         topPaneLayout.setVerticalGroup(
             topPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topPaneLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(searchText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topPaneLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(topPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(topPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(timeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addGroup(topPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -429,6 +433,14 @@ public class AtheleteMainPage extends javax.swing.JFrame {
         setColor(homeButton);
         idnHomeButton.setOpaque(true);
         resetColor(new JPanel[]{inventoryButton}, new JPanel[]{idnInventoryButton});
+        
+        // change database
+        
+        
+        // change button
+        jobButton.setText("Return Selected Items");
+        jobButton.setForeground(Color.orange);
+       
     }//GEN-LAST:event_homeButtonMousePressed
 
     private void inventoryButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inventoryButtonMousePressed
@@ -436,11 +448,25 @@ public class AtheleteMainPage extends javax.swing.JFrame {
         setColor(inventoryButton);
         idnInventoryButton.setOpaque(true);
         resetColor(new JPanel[]{homeButton}, new JPanel[]{idnHomeButton});
+        
+        // change database
+        
+        
+        // change button
+        jobButton.setText("Borrow Selected Items");
+        jobButton.setForeground(Color.black);
     }//GEN-LAST:event_inventoryButtonMousePressed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+        
+        //search
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(((DefaultTableModel) mainTable.getModel())); 
+        sorter.setRowFilter(RowFilter.regexFilter(searchText.getText()));
+
+        mainTable.setRowSorter(sorter);
+        
+    }//GEN-LAST:event_searchButtonActionPerformed
 
     private void topPaneMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topPaneMouseDragged
         // TODO add your handling code here:
@@ -505,14 +531,14 @@ public class AtheleteMainPage extends javax.swing.JFrame {
     private javax.swing.JPanel infoPane;
     private javax.swing.JPanel inventoryButton;
     private javax.swing.JLabel inventorytext;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JButton jobButton;
+    private javax.swing.JTable mainTable;
+    private javax.swing.JButton searchButton;
+    private javax.swing.JTextField searchText;
     private javax.swing.JPanel side_panel;
     private javax.swing.JPanel tablePane;
     private javax.swing.JLabel timeLabel;
@@ -528,7 +554,8 @@ public class AtheleteMainPage extends javax.swing.JFrame {
         for(int i=0;i<pane.length;i++){
            pane[i].setBackground(new Color(23,35,51));
            
-        } for(int i=0;i<indicators.length;i++){
+        } 
+        for(int i=0;i<indicators.length;i++){
            indicators[i].setOpaque(false);           
         }
         
