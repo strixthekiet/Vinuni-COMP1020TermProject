@@ -532,8 +532,11 @@
         </Container>
         <Component class="javax.swing.JButton" name="jobButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Return Selected Items"/>
+            <Property name="text" type="java.lang.String" value="Email Selected Users"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jobButtonActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

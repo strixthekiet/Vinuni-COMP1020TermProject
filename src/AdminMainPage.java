@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.RowFilter;
 import javax.swing.Timer;
@@ -373,7 +374,12 @@ public class AdminMainPage extends javax.swing.JFrame {
         jTextPane1.setText("1. \nBadminton Racket\nLate: 3 days 2 hours\nNguyen Don The Kiet \n\n2.\nBadminton Racket\nLate: 3 days 2 hours\nNguyen Don The Kiet\n\n3.\nBadminton Racket\nLate: 3 days 2 hours\nNguyen Don The Kiet \n");
         jScrollPane3.setViewportView(jTextPane1);
 
-        jobButton.setText("Return Selected Items");
+        jobButton.setText("Email Selected Users");
+        jobButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jobButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout infoPaneLayout = new javax.swing.GroupLayout(infoPane);
         infoPane.setLayout(infoPaneLayout);
@@ -520,7 +526,7 @@ public class AdminMainPage extends javax.swing.JFrame {
     private void inventoryButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inventoryButtonMousePressed
         // TODO add your handling code here:
         setColor(inventoryButton); 
-        ind_3.setOpaque(true);
+        ind_4.setOpaque(true);
         resetColor(new JPanel[]{usersButton,homeButton}, new JPanel[]{ind_3, ind_1});
         
         // change button
@@ -562,6 +568,37 @@ public class AdminMainPage extends javax.swing.JFrame {
     private void homeButtonMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeButtonMouseReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_homeButtonMouseReleased
+
+    private void jobButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jobButtonActionPerformed
+        // TODO add your handling code here:
+        switch(jobButton.getText())
+        {
+            
+            case "Email Selected Users" -> 
+            {
+                try 
+                {
+                    String email = "email1@example.com";
+                    String subject = "Late Notice for Mr. (name)";
+                    String body = "Return the fking racket bitch.";
+                    
+                    String url = "mailto:" + email + "?subject=" + subject.replaceAll(" ","%20") + "&body=" + body.replaceAll(" ", "%20");
+                    java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
+                }
+                catch (java.io.IOException e) 
+                {
+                    JOptionPane.showMessageDialog(null, "Browsers can't be opened", "URL error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            case "Delete Selected Users" -> {
+            }
+            case "Delete Items" -> {
+            }
+            default -> {
+            }
+            
+        }
+    }//GEN-LAST:event_jobButtonActionPerformed
 
     /**
      * @param args the command line arguments

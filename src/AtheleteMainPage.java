@@ -131,6 +131,11 @@ public class AtheleteMainPage extends javax.swing.JFrame {
         jScrollPane3.setViewportView(jTextPane1);
 
         jobButton.setText("Return Selected Items");
+        jobButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jobButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout infoPaneLayout = new javax.swing.GroupLayout(infoPane);
         infoPane.setLayout(infoPaneLayout);
@@ -483,6 +488,10 @@ public class AtheleteMainPage extends javax.swing.JFrame {
         xx = evt.getX();
         xy = evt.getY();
     }//GEN-LAST:event_topPaneMousePressed
+
+    private void jobButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jobButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jobButtonActionPerformed
 
     /**
      * @param args the command line arguments
