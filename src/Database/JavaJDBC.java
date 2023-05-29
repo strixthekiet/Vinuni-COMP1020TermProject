@@ -12,7 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 /**
  *
- * @author tbhun
+ * @author tbhung
  */
 public class JavaJDBC {
     /**
