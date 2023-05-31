@@ -177,10 +177,10 @@ public class AtheleteMainPage extends javax.swing.JFrame {
         mainTable.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         mainTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                { new Integer(1), "racket", "13:45 13/05", "3 days", "13:45 16/05", "100% new"},
-                { new Integer(2), "Football ball", "14:10 10/05", "1 week", "14:10 17/05", null},
-                { new Integer(3), "volleyball", "09:10 11/05", "3 hours", "12:10 11/05", null},
-                { new Integer(5), "Swimsuit", "10:55 14/05", "50 mins", "10:55 14/05", null},
+                { new Integer(1), "racket", "13:45 13/05", "13:45 16/05", "100% new", null},
+                { new Integer(2), "Football ball", "14:10 10/05", "14:10 17/05", null,  new Integer(34)},
+                { new Integer(3), "volleyball", "09:10 11/05", "12:10 11/05", null, null},
+                { new Integer(5), "Swimsuit", "10:55 14/05", "10:55 14/05", null,  new Integer(2)},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -219,11 +219,11 @@ public class AtheleteMainPage extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Item Name", "Borrowed Date", "Duration", "Return Date", "Condition"
+                "ID", "Item Name", "Borrowed Date", "Return Date", "Condition", "Quantity"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -491,6 +491,21 @@ public class AtheleteMainPage extends javax.swing.JFrame {
 
     private void jobButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jobButtonActionPerformed
         // TODO add your handling code here:
+        if(jobButton.getText().equals("Return Selected Items"))
+        {
+            
+        }
+        else
+        {
+            int row = mainTable.getSelectedRow();
+            String itemName = mainTable.getModel().getValueAt(row, 1).toString();
+            String ID = mainTable.getModel().getValueAt(row,0).toString();
+            String quantity = mainTable.getModel().getValueAt(row,5).toString();
+            
+            Confirmation cf = new Confirmation(itemName, ID, quantity );
+            cf.setVisible(true);
+            
+        }
     }//GEN-LAST:event_jobButtonActionPerformed
 
     /**
