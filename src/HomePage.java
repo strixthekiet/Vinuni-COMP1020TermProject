@@ -1,6 +1,7 @@
 import java.awt.Taskbar;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import Database.JavaJDBC;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -159,39 +160,38 @@ public class HomePage extends javax.swing.JFrame {
      
     }//GEN-LAST:event_usernameFieldActionPerformed
 
+    
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         // TODO add your handling code here:
-        if(usernameField.getText().equals(""))
+        
+        String username = usernameField.getText();
+        String password = passwordFIeld.getText();
+        
+        if(username.equals(""))
         {
             JOptionPane.showMessageDialog(null,"Please enter your username!");
         }
-        else if(passwordFIeld.getText().equals(""))
+        else if(password.equals(""))
         {
             JOptionPane.showMessageDialog(null,"Please enter your password!");
         }
-        else if (!usernameField.getText().equals("Strix"))
-        {
-            JOptionPane.showMessageDialog(null, "Username doesnt exist");
-        }
-        else if(passwordFIeld.getText().contains("1"))
+        else if(new JavaJDBC().adminLogin(username, password))
         {
             super.dispose();
             AdminMainPage adminMainPage = new AdminMainPage();
             adminMainPage.setVisible(true);           
         }
-        else if(!passwordFIeld.getText().contains("0"))
-        {
-            JOptionPane.showMessageDialog(null, "Wrong Password", "WTF?", JOptionPane.ERROR_MESSAGE);
-        }
-        
-        else
+        else if(new JavaJDBC().userLogin(username, password))
         {
             super.dispose();
             AtheleteMainPage atheleteMainPage = new AtheleteMainPage();
             atheleteMainPage.setVisible(true);
         }
-                    
-        
+        else
+        {
+            System.out.println(username + " " + password);
+            JOptionPane.showMessageDialog(null, "Invalid username or password.");
+        }            
     }//GEN-LAST:event_loginActionPerformed
 
     /**
