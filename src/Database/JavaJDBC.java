@@ -32,7 +32,7 @@ public class JavaJDBC {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection=DriverManager.getConnection(url,UserName, password);
             //System.out.println(connection);
-            pst=connection.prepareStatement("select * from user");
+            pst=connection.prepareStatement("select * from users");
             rs=pst.executeQuery();
             while(rs.next()) {
                 System.out.println(rs.getString(1) + " " +
@@ -60,7 +60,7 @@ public class JavaJDBC {
     }
     
     public boolean userLogin(String username, String password) {
-        String query = "SELECT * FROM user WHERE userName="
+        String query = "SELECT * FROM users WHERE userName="
                 + "'" + username + "'"
                 + " AND password="
                 + "'" + password + "'" + ";";
@@ -77,7 +77,7 @@ public class JavaJDBC {
     }
     
     public boolean adminLogin(String username, String password) {
-        String query = "SELECT * FROM admin WHERE adminName="
+        String query = "SELECT * FROM admins WHERE userName="
                 + '"' + username + '"'
                 + " AND password="
                 + '"' + password + '"' + ";";
