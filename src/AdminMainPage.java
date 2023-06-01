@@ -519,7 +519,7 @@ public class AdminMainPage extends javax.swing.JFrame {
         ind_3.setOpaque(true);
         resetColor(new JPanel[]{homeButton,inventoryButton}, new JPanel[]{ind_1, ind_4});
         // change button
-        jobButton.setText("Notify Selected Users");
+        jobButton.setText("Add New User");
         jobButton.setForeground(Color.orange);
     }//GEN-LAST:event_usersButtonMousePressed
 
@@ -578,8 +578,17 @@ public class AdminMainPage extends javax.swing.JFrame {
             {
                 try 
                 {
+                    String transacctionID = "V";
+                    
+                    
+                    //Get student student name and email
                     String email = "email1@example.com";
-                    String subject = "Late Notice for Mr. (name)";
+                    String studentname = "Strix";
+                    String studentID = "V";
+                    
+                    
+                    
+                    String subject = "Late Notice for " + studentname;
                     String body = "Return the fking racket bitch.";
                     
                     String url = "mailto:" + email + "?subject=" + subject.replaceAll(" ","%20") + "&body=" + body.replaceAll(" ", "%20");
@@ -590,7 +599,10 @@ public class AdminMainPage extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Browsers can't be opened", "URL error", JOptionPane.ERROR_MESSAGE);
                 }
             }
-            case "Delete Selected Users" -> {
+            case "Add New User" -> 
+            {
+                AddUser ad = new AddUser();
+                ad.setVisible(true);
             }
             case "Delete Items" -> {
             }
