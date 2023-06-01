@@ -388,6 +388,7 @@ public class AddUser extends javax.swing.JFrame {
        
         if("V".equals(text.charAt(0)))
         {
+<<<<<<< Updated upstream
             JOptionPane.showMessageDialog(null, "StudentID must starts with V!");
         }
         else if(text.length() != 9)
@@ -397,6 +398,17 @@ public class AddUser extends javax.swing.JFrame {
         else if(!text.substring( 1, 5).equals("2020") && !text.substring( 1, 5).equals("2021") && !text.substring( 1, 5).equals("2022"))
         {
             JOptionPane.showMessageDialog(null, "StudentID is not correct!");
+=======
+            JOptionPane.showConfirmDialog(null, "StudentID must starts with V!");
+        }
+        else if(text.length() != 9)
+        {
+            JOptionPane.showConfirmDialog(null, "StudentID is not correct!");
+        }
+        else if(!text.substring( 1, 5).equals("2020") && !text.substring( 1, 5).equals("2021") && !text.substring( 1, 5).equals("2022"))
+        {
+            JOptionPane.showConfirmDialog(null, "StudentID is not correct!");
+>>>>>>> Stashed changes
         }
     }//GEN-LAST:event_studentIDFocusLost
 
