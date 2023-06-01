@@ -2,6 +2,12 @@ import java.awt.Taskbar;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import Database.JavaJDBC;
+import java.sql.ResultSet;
+import com.sportsinventory.DAO.AdminDAO;
+import com.sportsinventory.DAO.UserDAO;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -177,15 +183,29 @@ public class HomePage extends javax.swing.JFrame {
         }
         else if(new JavaJDBC().adminLogin(username, password))
         {
+            ResultSet rs = new AdminDAO().getAdminDAO(username);
             super.dispose();
-            AdminMainPage adminMainPage = new AdminMainPage();
-            adminMainPage.setVisible(true);           
+            AdminMainPage adminMainPage = null;
+            try {
+                if (rs.next())
+                    adminMainPage = new AdminMainPage(rs.getString("fullname"), "COHORT3 CECS");
+            } catch (SQLException ex) {
+                Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (adminMainPage != null) adminMainPage.setVisible(true);           
         }
         else if(new JavaJDBC().userLogin(username, password))
         {
+            ResultSet rs = new UserDAO().getUserDAO(username);
             super.dispose();
-            AtheleteMainPage atheleteMainPage = new AtheleteMainPage();
-            atheleteMainPage.setVisible(true);
+            AtheleteMainPage atheleteMainPage = null;
+            try {
+                if (rs.next())
+                    atheleteMainPage = new AtheleteMainPage(rs.getString("fullname"), "COHORT3 CECS");
+            } catch (SQLException ex) {
+                Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (atheleteMainPage != null) atheleteMainPage.setVisible(true);
         }
         else
         {

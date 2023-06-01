@@ -40,6 +40,20 @@ public class AdminMainPage extends javax.swing.JFrame {
         dt();
     }
     
+    public AdminMainPage(String _adminName, String _adminDescript) {
+        initComponents();
+        setColor(homeButton); 
+        
+        adminName.setText(_adminName);
+        adminTitle.setText(_adminDescript);
+        
+        ind_1.setOpaque(true);
+        resetColor(new JPanel[]{usersButton,inventoryButton}, new JPanel[]{ind_3, ind_4});
+        jobButton.setForeground(Color.orange);
+        times();
+        dt();
+    }
+    
     public void dt()
     {
         Date d  =new Date();
@@ -100,7 +114,7 @@ public class AdminMainPage extends javax.swing.JFrame {
         infoPane = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         adminName = new javax.swing.JLabel();
-        adminTItile = new javax.swing.JLabel();
+        adminTitle = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
         jobButton = new javax.swing.JButton();
@@ -141,7 +155,6 @@ public class AdminMainPage extends javax.swing.JFrame {
             .addGap(0, 43, Short.MAX_VALUE)
         );
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Home");
 
@@ -189,7 +202,6 @@ public class AdminMainPage extends javax.swing.JFrame {
             .addGap(0, 43, Short.MAX_VALUE)
         );
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Users");
 
@@ -237,7 +249,6 @@ public class AdminMainPage extends javax.swing.JFrame {
             .addGap(0, 43, Short.MAX_VALUE)
         );
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Inventory");
 
@@ -308,7 +319,6 @@ public class AdminMainPage extends javax.swing.JFrame {
         searchButton.setBorderPainted(false);
         searchButton.setMaximumSize(new java.awt.Dimension(40, 40));
         searchButton.setMinimumSize(new java.awt.Dimension(40, 40));
-        searchButton.setSize(new java.awt.Dimension(40, 40));
         searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchButtonActionPerformed(evt);
@@ -360,10 +370,10 @@ public class AdminMainPage extends javax.swing.JFrame {
         adminName.setText("PT. Nguyen Hoang");
         jPanel4.add(adminName, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 300, 30));
 
-        adminTItile.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        adminTItile.setForeground(new java.awt.Color(255, 255, 255));
-        adminTItile.setText("SPR2023 - VCOR1022 Coach");
-        jPanel4.add(adminTItile, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, -1, -1));
+        adminTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        adminTitle.setForeground(new java.awt.Color(255, 255, 255));
+        adminTitle.setText("SPR2023 - VCOR1022 Coach");
+        jPanel4.add(adminTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, -1, -1));
 
         StyledDocument doc = jTextPane1.getStyledDocument();
         SimpleAttributeSet center = new SimpleAttributeSet();
@@ -418,7 +428,6 @@ public class AdminMainPage extends javax.swing.JFrame {
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
 
-        mainTable.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         mainTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Strix", "racket", "13:45 13/05", "3 days", "13:45 16/05"},
@@ -519,7 +528,7 @@ public class AdminMainPage extends javax.swing.JFrame {
         ind_3.setOpaque(true);
         resetColor(new JPanel[]{homeButton,inventoryButton}, new JPanel[]{ind_1, ind_4});
         // change button
-        jobButton.setText("Notify Selected Users");
+        jobButton.setText("Add New User");
         jobButton.setForeground(Color.orange);
     }//GEN-LAST:event_usersButtonMousePressed
 
@@ -530,7 +539,7 @@ public class AdminMainPage extends javax.swing.JFrame {
         resetColor(new JPanel[]{usersButton,homeButton}, new JPanel[]{ind_3, ind_1});
         
         // change button
-        jobButton.setText("Delete Selected Items"); // only delete the onces not in use
+        jobButton.setText("Add New Item"); // only delete the onces not in use
         jobButton.setForeground(Color.red);
     }//GEN-LAST:event_inventoryButtonMousePressed
 
@@ -578,8 +587,17 @@ public class AdminMainPage extends javax.swing.JFrame {
             {
                 try 
                 {
+                    String transacctionID = "V";
+                    
+                    
+                    //Get student student name and email
                     String email = "email1@example.com";
-                    String subject = "Late Notice for Mr. (name)";
+                    String studentname = "Strix";
+                    String studentID = "V";
+                    
+                    
+                    
+                    String subject = "Late Notice for " + studentname;
                     String body = "Return the fking racket bitch.";
                     
                     String url = "mailto:" + email + "?subject=" + subject.replaceAll(" ","%20") + "&body=" + body.replaceAll(" ", "%20");
@@ -590,9 +608,15 @@ public class AdminMainPage extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(null, "Browsers can't be opened", "URL error", JOptionPane.ERROR_MESSAGE);
                 }
             }
-            case "Delete Selected Users" -> {
+            case "Add New User" -> 
+            {
+                AddUser ad = new AddUser();
+                ad.setVisible(true);
             }
-            case "Delete Items" -> {
+            case "Add New Item" -> 
+            {
+                AddItem it = new AddItem();
+                it.setVisible(true);
             }
             default -> {
             }
@@ -656,7 +680,7 @@ public class AdminMainPage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel adminName;
-    private javax.swing.JLabel adminTItile;
+    private javax.swing.JLabel adminTitle;
     private javax.swing.JLabel dateLabel;
     private javax.swing.JLabel dayLabel;
     private javax.swing.JPanel homeButton;
