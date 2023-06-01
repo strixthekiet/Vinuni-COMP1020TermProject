@@ -530,7 +530,7 @@ public class AdminMainPage extends javax.swing.JFrame {
         resetColor(new JPanel[]{usersButton,homeButton}, new JPanel[]{ind_3, ind_1});
         
         // change button
-        jobButton.setText("Delete Selected Items"); // only delete the onces not in use
+        jobButton.setText("Add New Item"); // only delete the onces not in use
         jobButton.setForeground(Color.red);
     }//GEN-LAST:event_inventoryButtonMousePressed
 
@@ -604,7 +604,9 @@ public class AdminMainPage extends javax.swing.JFrame {
                 AddUser ad = new AddUser();
                 ad.setVisible(true);
             }
-            case "Delete Items" -> {
+            case "Add New Item" -> 
+            {
+                
             }
             default -> {
             }

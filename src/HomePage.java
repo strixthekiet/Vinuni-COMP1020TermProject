@@ -181,7 +181,7 @@ public class HomePage extends javax.swing.JFrame {
         }
         else if(!passwordFIeld.getText().contains("0"))
         {
-            JOptionPane.showMessageDialog(null, "Wrong Password", "WTF?", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Wrong Password", "Whats this for?", JOptionPane.ERROR_MESSAGE);
         }
         
         else
