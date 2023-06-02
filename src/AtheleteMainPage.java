@@ -30,11 +30,12 @@ public class AtheleteMainPage extends javax.swing.JFrame {
      */
     public AtheleteMainPage() {
         initComponents();
+        setColor(homeButton); 
+        idnHomeButton.setOpaque(true);
+        resetColor(new JPanel[]{inventoryButton}, new JPanel[]{idnInventoryButton});
+        jobButton.setForeground(Color.orange);
         times();
         dt();
-        
-        // tbh
-        // copy the homebutton pressed and put it here
     }
     
     public AtheleteMainPage(String _userName, String _userDescript) {
@@ -117,7 +118,6 @@ public class AtheleteMainPage extends javax.swing.JFrame {
         searchButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -253,7 +253,7 @@ public class AtheleteMainPage extends javax.swing.JFrame {
         tablePane.setLayout(tablePaneLayout);
         tablePaneLayout.setHorizontalGroup(
             tablePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tablePaneLayout.createSequentialGroup()
+            .addGroup(tablePaneLayout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -457,31 +457,6 @@ public class AtheleteMainPage extends javax.swing.JFrame {
         jobButton.setText("Return Selected Items");
         jobButton.setForeground(Color.orange);
        
-        // change table
-        DefaultTableModel model = new DefaultTableModel();
-
-        String[] columnNames =  {"Booking ID", "Item ID", "Item Name", "Quantity", "Condition", "Borrow Date", "Return Date"};
-        model.setColumnIdentifiers(columnNames);
-
-        
-        // tbh
-        // retrieve the current items bookings and add to the rows
-        
-        /*
-        while (resultSet.next()) {
-        Object[] rowData = {
-            
-        };
-        model.addRow(rowData);
-        }
-
-        // Close the result set and statement
-        resultSet.close();
-        
-        */
-        
-        // Set the table model
-        mainTable.setModel(model);
     }//GEN-LAST:event_homeButtonMousePressed
 
     private void inventoryButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inventoryButtonMousePressed
@@ -496,36 +471,6 @@ public class AtheleteMainPage extends javax.swing.JFrame {
         // change button
         jobButton.setText("Borrow Selected Items");
         jobButton.setForeground(Color.black);
-        
-        // change button
-        jobButton.setText("Return Selected Items");
-        jobButton.setForeground(Color.orange);
-       
-        // change table
-        DefaultTableModel model = new DefaultTableModel();
-
-        String[] columnNames =  { "Item ID", "Item Name", "Quantity", "Condition"};
-        model.setColumnIdentifiers(columnNames);
-
-        
-        // tbh
-        // retrieve the current items bookings and add to the rows
-        
-        /*
-        while (resultSet.next()) {
-        Object[] rowData = {
-            
-        };
-        model.addRow(rowData);
-        }
-
-        // Close the result set and statement
-        resultSet.close();
-        
-        */
-        
-        // Set the table model
-        mainTable.setModel(model);
     }//GEN-LAST:event_inventoryButtonMousePressed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
@@ -559,7 +504,7 @@ public class AtheleteMainPage extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(jobButton.getText().equals("Return Selected Items"))
         {
-            //tbh the user returns item
+            
         }
         else
         {

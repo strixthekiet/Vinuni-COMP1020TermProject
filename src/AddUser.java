@@ -53,7 +53,7 @@ public class AddUser extends javax.swing.JFrame {
         studentEmail = new javax.swing.JTextField();
         studentName = new javax.swing.JTextField();
         CohortSelection = new javax.swing.JComboBox<>();
-        CohortSelection1 = new javax.swing.JComboBox<>();
+        majorSelection = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add User");
@@ -304,8 +304,8 @@ public class AddUser extends javax.swing.JFrame {
         CohortSelection.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         CohortSelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Cohort 1", "Cohort 2", "Cohort 3", "Cohort 4" }));
 
-        CohortSelection1.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
-        CohortSelection1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CECS", "CBM", "CHS", "CAS", "Staff" }));
+        majorSelection.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        majorSelection.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "CECS", "CBM", "CHS", "CAS", "Staff" }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -322,7 +322,7 @@ public class AddUser extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addComponent(CohortSelection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(CohortSelection1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(majorSelection, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap())
                     .addComponent(CreatedDateField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
@@ -342,7 +342,7 @@ public class AddUser extends javax.swing.JFrame {
                 .addComponent(CreatedDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(CohortSelection1)
+                    .addComponent(majorSelection)
                     .addComponent(CohortSelection))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -371,7 +371,17 @@ public class AddUser extends javax.swing.JFrame {
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         // TODO add your handling code here:
-        //
+        String IDString = studentID.getText();
+        IDString = IDString.substring(1, IDString.length() - 1);
+        
+        int studentIDString = Integer.parseInt(IDString);
+        String studentNameString = studentName.getText();
+        String studentEmailString = studentEmail.getText();
+        String createdDate = CreatedDateField.getText();
+        String cohortString = CohortSelection.getSelectedItem().toString();
+        System.err.println(cohortString);
+        String major = majorSelection.getSelectedItem().toString();
+        
 
     }//GEN-LAST:event_confirmButtonActionPerformed
 
@@ -379,11 +389,11 @@ public class AddUser extends javax.swing.JFrame {
         // TODO add your handling code here:
         String text = studentID.getText();
        
-        if(!"V".equals(text.charAt(0)))
+        if(text.charAt(0) != 'V')
         {
             JOptionPane.showMessageDialog(null, "StudentID must starts with V!");
         }
-        else if(text.length() != 9)
+        else if(text.length() != 10)
         {
             JOptionPane.showMessageDialog(null, "StudentID is not correct!");
         }
@@ -391,12 +401,8 @@ public class AddUser extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(null, "StudentID is not correct!");
         }
-        else if(text.length() != 9)
-        {
-            JOptionPane.showConfirmDialog(null, "StudentID is not correct!");
-        }
         else{
-            
+            // tbh
         }
     }//GEN-LAST:event_studentIDFocusLost
 
@@ -474,7 +480,6 @@ public class AddUser extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> CohortSelection;
-    private javax.swing.JComboBox<String> CohortSelection1;
     private javax.swing.JLabel CohortText;
     private javax.swing.JLabel CreatedDateField;
     private javax.swing.JLabel accountCreateDate;
@@ -486,6 +491,7 @@ public class AddUser extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JComboBox<String> majorSelection;
     private javax.swing.JTextField studentEmail;
     private javax.swing.JLabel studentEmailText;
     private javax.swing.JTextField studentID;

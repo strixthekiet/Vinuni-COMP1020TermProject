@@ -20,6 +20,14 @@ import javax.swing.table.TableRowSorter;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
+import java.sql.ResultSet;
+import com.sportsinventory.DAO.BookingDAO;
+import com.sportsinventory.DAO.AdminDAO;
+import com.sportsinventory.DAO.UserDAO;
+import com.sportsinventory.DAO.ItemDAO;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -528,28 +536,33 @@ public class AdminMainPage extends javax.swing.JFrame {
 
         String[] columnNames =  {"Booking ID", "User ID", "Item ID", "Quantity", "Borrow Date", "Return Date"};
         model.setColumnIdentifiers(columnNames);
-
+        
+        ResultSet resultSet = new BookingDAO().getBookingsTable();
         
         // tbh
         // retrieve the current items bookings and add to the rows
-        
-        /*
-        while (resultSet.next()) {
-        Object[] rowData = {
-            resultSet.getInt("Booking ID"),
-            resultSet.getInt("User ID"),
-            resultSet.getInt("Item ID"),
-            resultSet.getInt("Quantity"),
-            resultSet.getDate("Borrow Date"),
-            resultSet.getDate("Return Date")
-        };
-        model.addRow(rowData);
+        try {
+            while (resultSet.next()) {
+                Object[] rowData = {
+                    resultSet.getInt("bookingID"),
+                    resultSet.getInt("userID"),
+                    resultSet.getInt("itemID"),
+                    resultSet.getInt("Quantity"),
+                    resultSet.getDate("borrowDate"),
+                    resultSet.getDate("borrowReturn")
+                };
+                model.addRow(rowData);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminMainPage.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        // Close the result set and statement
-        resultSet.close();
-        
-        */
+        try {
+            // Close the result set and statement
+            resultSet.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminMainPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         // Set the table model
         mainTable.setModel(model);
@@ -569,23 +582,33 @@ public class AdminMainPage extends javax.swing.JFrame {
 
         String[] columnNames =  {"Student ID", "Full Name", "Register Date", "User Name"};
         model.setColumnIdentifiers(columnNames);
-
+        
+        ResultSet resultSet = new UserDAO().getQueryResult();
         
         // tbh
         // retrieve the current items bookings and add to the rows
         
-        /*
-        while (resultSet.next()) {
-        Object[] rowData = {
-            
-        };
-        model.addRow(rowData);
+        try {
+            while (resultSet.next()) {
+                Object[] rowData = {
+                    resultSet.getInt("userID"),
+                    resultSet.getString("fullname"),
+                    resultSet.getDate("regDate"),
+                    resultSet.getString("username")
+                };
+                model.addRow(rowData);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminMainPage.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        // Close the result set and statement
-        resultSet.close();
-        
-        */
+        try {
+            // Close the result set and statement
+            resultSet.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminMainPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
         
         // Set the table model
         mainTable.setModel(model);
@@ -606,23 +629,32 @@ public class AdminMainPage extends javax.swing.JFrame {
 
         String[] columnNames =  {"Item ID", "Item Name", "Quantity", "Condition"};
         model.setColumnIdentifiers(columnNames);
-
+        
+        ResultSet resultSet = new ItemDAO().getItemTable();
         
         // tbh
         // retrieve the current items bookings and add to the rows
         
-        /*
-        while (resultSet.next()) {
-        Object[] rowData = {
-            
-        };
-        model.addRow(rowData);
+        try {
+            while (resultSet.next()) {
+                Object[] rowData = {
+                    resultSet.getInt("itemID"),
+                    resultSet.getString("name"),
+                    resultSet.getInt("Quantity"),
+                    resultSet.getString("Condition")
+                };
+                model.addRow(rowData);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminMainPage.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        // Close the result set and statement
-        resultSet.close();
-        
-        */
+        try {
+            // Close the result set and statement
+            resultSet.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminMainPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         // Set the table model
         mainTable.setModel(model);

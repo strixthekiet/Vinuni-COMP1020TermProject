@@ -328,7 +328,7 @@
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="CohortSelection" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="CohortSelection1" min="-2" pref="114" max="-2" attributes="0"/>
+                                  <Component id="majorSelection" min="-2" pref="114" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -355,7 +355,7 @@
                   <Component id="CreatedDateField" min="-2" pref="40" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="CohortSelection1" max="32767" attributes="0"/>
+                      <Component id="majorSelection" max="32767" attributes="0"/>
                       <Component id="CohortSelection" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -456,7 +456,7 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JComboBox" name="CohortSelection1">
+        <Component class="javax.swing.JComboBox" name="majorSelection">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Helvetica Neue" size="16" style="0"/>
