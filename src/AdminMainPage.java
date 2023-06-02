@@ -20,6 +20,14 @@ import javax.swing.table.TableRowSorter;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
+import java.sql.ResultSet;
+import com.sportsinventory.DAO.BookingDAO;
+import com.sportsinventory.DAO.AdminDAO;
+import com.sportsinventory.DAO.UserDAO;
+import com.sportsinventory.DAO.ItemDAO;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -32,12 +40,13 @@ public class AdminMainPage extends javax.swing.JFrame {
      */
     public AdminMainPage() {
         initComponents();
-        setColor(homeButton); 
-        ind_1.setOpaque(true);
-        resetColor(new JPanel[]{usersButton,inventoryButton}, new JPanel[]{ind_3, ind_4});
-        jobButton.setForeground(Color.orange);
         times();
         dt();
+        
+        // tbh 
+        // basically copy and paste everything inside the homeButtonMousePressed function here to initialize, do this after finish that function
+        
+        
     }
     
     public AdminMainPage(String _adminName, String _adminDescript) {
@@ -484,7 +493,8 @@ public class AdminMainPage extends javax.swing.JFrame {
             }
         });
         mainTable.setGridColor(new java.awt.Color(255, 255, 255));
-        mainTable.setRowHeight(22);
+        mainTable.setRowHeight(30);
+        mainTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(mainTable);
         if (mainTable.getColumnModel().getColumnCount() > 0) {
             mainTable.getColumnModel().getColumn(2).setPreferredWidth(30);
@@ -519,7 +529,43 @@ public class AdminMainPage extends javax.swing.JFrame {
         
         // change button
         jobButton.setText("Notify Selected Users");
-        jobButton.setForeground(Color.orange);
+        jobButton.setForeground(Color.blue);
+        
+        // change table
+        DefaultTableModel model = new DefaultTableModel();
+
+        String[] columnNames =  {"Booking ID", "User ID", "Item ID", "Quantity", "Borrow Date", "Return Date"};
+        model.setColumnIdentifiers(columnNames);
+        
+        ResultSet resultSet = new BookingDAO().getBookingsTable();
+        
+        // tbh
+        // retrieve the current items bookings and add to the rows
+        try {
+            while (resultSet.next()) {
+                Object[] rowData = {
+                    resultSet.getInt("bookingID"),
+                    resultSet.getInt("userID"),
+                    resultSet.getInt("itemID"),
+                    resultSet.getInt("Quantity"),
+                    resultSet.getDate("borrowDate"),
+                    resultSet.getDate("borrowReturn")
+                };
+                model.addRow(rowData);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminMainPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            // Close the result set and statement
+            resultSet.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminMainPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        // Set the table model
+        mainTable.setModel(model);
     }//GEN-LAST:event_homeButtonMousePressed
 
     private void usersButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usersButtonMousePressed
@@ -530,6 +576,42 @@ public class AdminMainPage extends javax.swing.JFrame {
         // change button
         jobButton.setText("Add New User");
         jobButton.setForeground(Color.orange);
+        
+        // change table
+        DefaultTableModel model = new DefaultTableModel();
+
+        String[] columnNames =  {"Student ID", "Full Name", "Register Date", "User Name"};
+        model.setColumnIdentifiers(columnNames);
+        
+        ResultSet resultSet = new UserDAO().getQueryResult();
+        
+        // tbh
+        // retrieve the current items bookings and add to the rows
+        
+        try {
+            while (resultSet.next()) {
+                Object[] rowData = {
+                    resultSet.getInt("userID"),
+                    resultSet.getString("fullname"),
+                    resultSet.getDate("regDate"),
+                    resultSet.getString("username")
+                };
+                model.addRow(rowData);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminMainPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            // Close the result set and statement
+            resultSet.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminMainPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        
+        // Set the table model
+        mainTable.setModel(model);
     }//GEN-LAST:event_usersButtonMousePressed
 
     private void inventoryButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inventoryButtonMousePressed
@@ -541,6 +623,41 @@ public class AdminMainPage extends javax.swing.JFrame {
         // change button
         jobButton.setText("Add New Item"); // only delete the onces not in use
         jobButton.setForeground(Color.red);
+        
+        // change table
+        DefaultTableModel model = new DefaultTableModel();
+
+        String[] columnNames =  {"Item ID", "Item Name", "Quantity", "Condition"};
+        model.setColumnIdentifiers(columnNames);
+        
+        ResultSet resultSet = new ItemDAO().getItemTable();
+        
+        // tbh
+        // retrieve the current items bookings and add to the rows
+        
+        try {
+            while (resultSet.next()) {
+                Object[] rowData = {
+                    resultSet.getInt("itemID"),
+                    resultSet.getString("name"),
+                    resultSet.getInt("Quantity"),
+                    resultSet.getString("Condition")
+                };
+                model.addRow(rowData);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminMainPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            // Close the result set and statement
+            resultSet.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminMainPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        // Set the table model
+        mainTable.setModel(model);
     }//GEN-LAST:event_inventoryButtonMousePressed
 
     int xx,xy;
@@ -585,21 +702,48 @@ public class AdminMainPage extends javax.swing.JFrame {
             
             case "Email Selected Users" -> 
             {
+                int rowSelected = mainTable.getSelectedRow();
+                
+                if(rowSelected == -1) // no item is selected
+                {
+                    return;
+                }
                 try 
                 {
-                    String transacctionID = "V";
+                    String bookingID = "1";  //get from selected row
+                    // get from db
+                    String borrowDate = "";
+                    String returnDate = "";
+                    int quantity = 1;
+                    String userID = "";
+                    String itemCondition= "";
                     
-                    
-                    //Get student student name and email
+                    //get username form userID
+                    String studentName = "";
+                    //Get email from userID
                     String email = "email1@example.com";
-                    String studentname = "Strix";
+                    //get student id from userID
                     String studentID = "V";
                     
+
+
+
+                    itemCondition = itemCondition.replaceAll("%", "%25");
                     
-                    
-                    String subject = "Late Notice for " + studentname;
-                    String body = "Return the fking racket bitch.";
-                    
+                    String subject = "Late Return Notice - Booking ID " + bookingID;
+
+                    String body = "Dear " + studentName + ",%0D%0A%0D%0A"
+                + "We hope this email finds you well. We are writing to inform you that we have noticed a delay in the return of certain sport equipment items that were borrowed by you from VinEquip, the sport equipment department of Vinuniversity. Your cooperation in promptly returning these items is greatly appreciated.%0D%0A%0D%0A"
+                + "Here are the details of the late items:%0D%0A%0D%0A"
+                + "Booking ID: " + bookingID + "%0D%0A"
+                + "Student ID: " + studentID + "%0D%0A"
+                + "Student Name: " + studentName + "%0D%0A%0D%0A"
+                + "Item Condition:%0D%0A"
+                + itemCondition + "%0D%0A%0D%0A"
+                + "Borrow Date: " + borrowDate + "%0D%0A"
+                + "Return Date (Expected): " + returnDate + "%0D%0A";
+
+
                     String url = "mailto:" + email + "?subject=" + subject.replaceAll(" ","%20") + "&body=" + body.replaceAll(" ", "%20");
                     java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
                 }
@@ -607,6 +751,7 @@ public class AdminMainPage extends javax.swing.JFrame {
                 {
                     JOptionPane.showMessageDialog(null, "Browsers can't be opened", "URL error", JOptionPane.ERROR_MESSAGE);
                 }
+                
             }
             case "Add New User" -> 
             {

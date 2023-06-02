@@ -131,6 +131,16 @@ public class ItemDAO {
         }
         return resultSet;
     }
+    
+    public ResultSet getItemTable() {
+        try {
+            String query = "SELECT * FROM items";
+            resultSet = statement.executeQuery(query);
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+        return resultSet;
+    }
 
 
     public DefaultTableModel buildTableModel(ResultSet resultSet) throws SQLException {

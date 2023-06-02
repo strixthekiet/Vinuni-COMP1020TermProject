@@ -85,6 +85,16 @@ public class BookingDAO {
         }
         return resultSet;
     }
+    
+    public ResultSet getBookingsTable() {
+        try {
+            String query = "Select * from bookings";
+            resultSet = statement.executeQuery(query);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return resultSet;
+    }
 
     public DefaultTableModel buildTableModel(ResultSet resultSet) throws SQLException {
         ResultSetMetaData metaData = resultSet.getMetaData();
