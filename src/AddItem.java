@@ -1,3 +1,6 @@
+import com.sportsinventory.DTO.ItemDTO;
+import com.sportsinventory.DAO.ItemDAO;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -12,6 +15,7 @@ public class AddItem extends javax.swing.JFrame {
     /**
      * Creates new form AddItem
      */
+    
     public AddItem() {
         initComponents();
     }
@@ -36,7 +40,7 @@ public class AddItem extends javax.swing.JFrame {
         conditionText = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         confirmButton = new javax.swing.JButton();
-        itemName1 = new javax.swing.JTextField();
+        itemCondition = new javax.swing.JTextField();
         quantity = new javax.swing.JTextField();
         itemName = new javax.swing.JTextField();
         itemID = new javax.swing.JLabel();
@@ -186,24 +190,24 @@ public class AddItem extends javax.swing.JFrame {
             }
         });
 
-        itemName1.setFont(new java.awt.Font("Helvetica Neue", 0, 20)); // NOI18N
-        itemName1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        itemName1.addFocusListener(new java.awt.event.FocusAdapter() {
+        itemCondition.setFont(new java.awt.Font("Helvetica Neue", 0, 20)); // NOI18N
+        itemCondition.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        itemCondition.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                itemName1FocusLost(evt);
+                itemConditionFocusLost(evt);
             }
         });
-        itemName1.addActionListener(new java.awt.event.ActionListener() {
+        itemCondition.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemName1ActionPerformed(evt);
+                itemConditionActionPerformed(evt);
             }
         });
-        itemName1.addKeyListener(new java.awt.event.KeyAdapter() {
+        itemCondition.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                itemName1KeyReleased(evt);
+                itemConditionKeyReleased(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                itemName1KeyTyped(evt);
+                itemConditionKeyTyped(evt);
             }
         });
 
@@ -267,7 +271,7 @@ public class AddItem extends javax.swing.JFrame {
                         .addComponent(itemID, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(itemName1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(itemCondition, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(93, 93, 93)
                         .addComponent(quantity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -286,7 +290,7 @@ public class AddItem extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(quantity, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(itemName1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(itemCondition, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(24, Short.MAX_VALUE))
@@ -300,6 +304,21 @@ public class AddItem extends javax.swing.JFrame {
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         // TODO add your handling code here:
         //
+        
+        String IDString = itemID.getText();
+        int itemIDString = Integer.parseInt(IDString);
+        String itemNameString = itemName.getText();
+        String QuantityString = quantity.getText();
+        int itemQuantityString = Integer.parseInt(QuantityString);
+        String itemConditionString = itemCondition.getText();
+        
+        ItemDTO item = new ItemDTO();
+        item.setItemID(itemIDString);
+        item.setItemName(itemNameString);
+        item.setQuantity(itemQuantityString);
+        item.setCondition(itemConditionString);
+        
+        new ItemDAO().addFunction(item);
     }//GEN-LAST:event_confirmButtonActionPerformed
 
     private void quantityFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_quantityFocusLost
@@ -334,21 +353,21 @@ public class AddItem extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_itemNameKeyTyped
 
-    private void itemName1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_itemName1FocusLost
+    private void itemConditionFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_itemConditionFocusLost
         // TODO add your handling code here:
-    }//GEN-LAST:event_itemName1FocusLost
+    }//GEN-LAST:event_itemConditionFocusLost
 
-    private void itemName1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemName1ActionPerformed
+    private void itemConditionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemConditionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_itemName1ActionPerformed
+    }//GEN-LAST:event_itemConditionActionPerformed
 
-    private void itemName1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_itemName1KeyReleased
+    private void itemConditionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_itemConditionKeyReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_itemName1KeyReleased
+    }//GEN-LAST:event_itemConditionKeyReleased
 
-    private void itemName1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_itemName1KeyTyped
+    private void itemConditionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_itemConditionKeyTyped
         // TODO add your handling code here:
-    }//GEN-LAST:event_itemName1KeyTyped
+    }//GEN-LAST:event_itemConditionKeyTyped
 
     /**
      * @param args the command line arguments
@@ -388,10 +407,10 @@ public class AddItem extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel conditionText;
     private javax.swing.JButton confirmButton;
+    private javax.swing.JTextField itemCondition;
     private javax.swing.JLabel itemID;
     private javax.swing.JLabel itemIDText;
     private javax.swing.JTextField itemName;
-    private javax.swing.JTextField itemName1;
     private javax.swing.JLabel itemNameText;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

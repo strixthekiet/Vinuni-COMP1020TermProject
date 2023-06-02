@@ -699,7 +699,6 @@ public class AdminMainPage extends javax.swing.JFrame {
         // TODO add your handling code here:
         switch(jobButton.getText())
         {
-            
             case "Email Selected Users" -> 
             {
                 int rowSelected = mainTable.getSelectedRow();

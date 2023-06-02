@@ -25,19 +25,19 @@ public class UserDAO {
         }
     }
 
-    public void addUserDAO(UserDTO userDTO, String userType) {
+    public void addUserDAO(UserDTO userDTO) {
         try {
             String query = "SELECT * FROM users WHERE userName='" + userDTO.getUsername() + "'";
             resultSet = statement.executeQuery(query);
             if(resultSet.next())
                 JOptionPane.showMessageDialog(null, "User already exists");
             else
-                addFunction(userDTO, userType);
+                addFunction(userDTO);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
-    public void addFunction(UserDTO userDTO, String userType) {
+    public void addFunction(UserDTO userDTO) {
         try {
             String userid = null;
             String password = null;
@@ -45,7 +45,7 @@ public class UserDAO {
             String resQuery = "SELECT * FROM users";
             resultSet = statement.executeQuery(resQuery);
 
-            String query = "INSERT INTO users (userID,userName,name,email,password,regDate) " +
+            String query = "INSERT INTO users (userID,userName,fullname,email,password,regDate) " +
                     "VALUES(?,?,?,?,?,?)";
             prepStatement = conn.prepareStatement(query);
             prepStatement.setInt(1, userDTO.getUserID());
