@@ -30,13 +30,27 @@ public class AtheleteMainPage extends javax.swing.JFrame {
      */
     public AtheleteMainPage() {
         initComponents();
-        setColor(homeButton); 
+        times();
+        dt();
+        
+        // tbh
+        // copy the homebutton pressed and put it here
+    }
+    
+    public AtheleteMainPage(String _userName, String _userDescript) {
+        initComponents();
+        setColor(homeButton);
+        
+        userName.setText(_userName);
+        userTitle.setText(_userDescript);
+        
         idnHomeButton.setOpaque(true);
         resetColor(new JPanel[]{inventoryButton}, new JPanel[]{idnInventoryButton});
         jobButton.setForeground(Color.orange);
         times();
         dt();
     }
+    
     public void dt()
     {
         Date d  =new Date();
@@ -80,8 +94,8 @@ public class AtheleteMainPage extends javax.swing.JFrame {
 
         infoPane = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        adminName = new javax.swing.JLabel();
-        adminTItile = new javax.swing.JLabel();
+        userName = new javax.swing.JLabel();
+        userTitle = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
         jobButton = new javax.swing.JButton();
@@ -103,6 +117,7 @@ public class AtheleteMainPage extends javax.swing.JFrame {
         searchButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -111,15 +126,15 @@ public class AtheleteMainPage extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(0, 153, 0));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        adminName.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
-        adminName.setForeground(new java.awt.Color(255, 255, 255));
-        adminName.setText("Nguyen Don The Kiet");
-        jPanel4.add(adminName, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 300, 30));
+        userName.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        userName.setForeground(new java.awt.Color(255, 255, 255));
+        userName.setText("Nguyen Don The Kiet");
+        jPanel4.add(userName, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 300, 30));
 
-        adminTItile.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        adminTItile.setForeground(new java.awt.Color(255, 255, 255));
-        adminTItile.setText("Cohort 3 CECS");
-        jPanel4.add(adminTItile, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, -1, -1));
+        userTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        userTitle.setForeground(new java.awt.Color(255, 255, 255));
+        userTitle.setText("Cohort 3 CECS");
+        jPanel4.add(userTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, -1, -1));
 
         StyledDocument doc = jTextPane1.getStyledDocument();
         SimpleAttributeSet center = new SimpleAttributeSet();
@@ -174,7 +189,6 @@ public class AtheleteMainPage extends javax.swing.JFrame {
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
 
-        mainTable.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         mainTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 { new Integer(1), "racket", "13:45 13/05", "13:45 16/05", "100% new", null},
@@ -239,7 +253,7 @@ public class AtheleteMainPage extends javax.swing.JFrame {
         tablePane.setLayout(tablePaneLayout);
         tablePaneLayout.setHorizontalGroup(
             tablePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tablePaneLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tablePaneLayout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -274,7 +288,6 @@ public class AtheleteMainPage extends javax.swing.JFrame {
             .addGap(0, 43, Short.MAX_VALUE)
         );
 
-        homeButtonText.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         homeButtonText.setForeground(new java.awt.Color(255, 255, 255));
         homeButtonText.setText("Home");
 
@@ -322,7 +335,6 @@ public class AtheleteMainPage extends javax.swing.JFrame {
             .addGap(0, 43, Short.MAX_VALUE)
         );
 
-        inventorytext.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         inventorytext.setForeground(new java.awt.Color(255, 255, 255));
         inventorytext.setText("Inventory");
 
@@ -388,7 +400,6 @@ public class AtheleteMainPage extends javax.swing.JFrame {
         searchButton.setBorderPainted(false);
         searchButton.setMaximumSize(new java.awt.Dimension(40, 40));
         searchButton.setMinimumSize(new java.awt.Dimension(40, 40));
-        searchButton.setSize(new java.awt.Dimension(40, 40));
         searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchButtonActionPerformed(evt);
@@ -446,6 +457,31 @@ public class AtheleteMainPage extends javax.swing.JFrame {
         jobButton.setText("Return Selected Items");
         jobButton.setForeground(Color.orange);
        
+        // change table
+        DefaultTableModel model = new DefaultTableModel();
+
+        String[] columnNames =  {"Booking ID", "Item ID", "Item Name", "Quantity", "Condition", "Borrow Date", "Return Date"};
+        model.setColumnIdentifiers(columnNames);
+
+        
+        // tbh
+        // retrieve the current items bookings and add to the rows
+        
+        /*
+        while (resultSet.next()) {
+        Object[] rowData = {
+            
+        };
+        model.addRow(rowData);
+        }
+
+        // Close the result set and statement
+        resultSet.close();
+        
+        */
+        
+        // Set the table model
+        mainTable.setModel(model);
     }//GEN-LAST:event_homeButtonMousePressed
 
     private void inventoryButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inventoryButtonMousePressed
@@ -460,6 +496,36 @@ public class AtheleteMainPage extends javax.swing.JFrame {
         // change button
         jobButton.setText("Borrow Selected Items");
         jobButton.setForeground(Color.black);
+        
+        // change button
+        jobButton.setText("Return Selected Items");
+        jobButton.setForeground(Color.orange);
+       
+        // change table
+        DefaultTableModel model = new DefaultTableModel();
+
+        String[] columnNames =  { "Item ID", "Item Name", "Quantity", "Condition"};
+        model.setColumnIdentifiers(columnNames);
+
+        
+        // tbh
+        // retrieve the current items bookings and add to the rows
+        
+        /*
+        while (resultSet.next()) {
+        Object[] rowData = {
+            
+        };
+        model.addRow(rowData);
+        }
+
+        // Close the result set and statement
+        resultSet.close();
+        
+        */
+        
+        // Set the table model
+        mainTable.setModel(model);
     }//GEN-LAST:event_inventoryButtonMousePressed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
@@ -493,7 +559,7 @@ public class AtheleteMainPage extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(jobButton.getText().equals("Return Selected Items"))
         {
-            
+            //tbh the user returns item
         }
         else
         {
@@ -544,8 +610,6 @@ public class AtheleteMainPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel adminName;
-    private javax.swing.JLabel adminTItile;
     private javax.swing.JLabel dateLabel;
     private javax.swing.JLabel dayLabel;
     private javax.swing.JPanel homeButton;
@@ -567,6 +631,8 @@ public class AtheleteMainPage extends javax.swing.JFrame {
     private javax.swing.JPanel tablePane;
     private javax.swing.JLabel timeLabel;
     private javax.swing.JPanel topPane;
+    private javax.swing.JLabel userName;
+    private javax.swing.JLabel userTitle;
     // End of variables declaration//GEN-END:variables
      private void setColor(JPanel pane)
     {

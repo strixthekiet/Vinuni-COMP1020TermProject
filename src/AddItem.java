@@ -49,7 +49,6 @@ public class AddItem extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 0));
         jPanel1.setMaximumSize(new java.awt.Dimension(150, 300));
-        jPanel1.setSize(new java.awt.Dimension(150, 300));
 
         jPanel2.setBackground(new java.awt.Color(23, 35, 51));
 

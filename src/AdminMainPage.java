@@ -32,7 +32,22 @@ public class AdminMainPage extends javax.swing.JFrame {
      */
     public AdminMainPage() {
         initComponents();
+        times();
+        dt();
+        
+        // tbh 
+        // basically copy and paste everything inside the homeButtonMousePressed function here to initialize, do this after finish that function
+        
+        
+    }
+    
+    public AdminMainPage(String _adminName, String _adminDescript) {
+        initComponents();
         setColor(homeButton); 
+        
+        adminName.setText(_adminName);
+        adminTitle.setText(_adminDescript);
+        
         ind_1.setOpaque(true);
         resetColor(new JPanel[]{usersButton,inventoryButton}, new JPanel[]{ind_3, ind_4});
         jobButton.setForeground(Color.orange);
@@ -100,7 +115,7 @@ public class AdminMainPage extends javax.swing.JFrame {
         infoPane = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         adminName = new javax.swing.JLabel();
-        adminTItile = new javax.swing.JLabel();
+        adminTitle = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
         jobButton = new javax.swing.JButton();
@@ -141,7 +156,6 @@ public class AdminMainPage extends javax.swing.JFrame {
             .addGap(0, 43, Short.MAX_VALUE)
         );
 
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Home");
 
@@ -189,7 +203,6 @@ public class AdminMainPage extends javax.swing.JFrame {
             .addGap(0, 43, Short.MAX_VALUE)
         );
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Users");
 
@@ -237,7 +250,6 @@ public class AdminMainPage extends javax.swing.JFrame {
             .addGap(0, 43, Short.MAX_VALUE)
         );
 
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Inventory");
 
@@ -308,7 +320,6 @@ public class AdminMainPage extends javax.swing.JFrame {
         searchButton.setBorderPainted(false);
         searchButton.setMaximumSize(new java.awt.Dimension(40, 40));
         searchButton.setMinimumSize(new java.awt.Dimension(40, 40));
-        searchButton.setSize(new java.awt.Dimension(40, 40));
         searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchButtonActionPerformed(evt);
@@ -360,10 +371,10 @@ public class AdminMainPage extends javax.swing.JFrame {
         adminName.setText("PT. Nguyen Hoang");
         jPanel4.add(adminName, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 300, 30));
 
-        adminTItile.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        adminTItile.setForeground(new java.awt.Color(255, 255, 255));
-        adminTItile.setText("SPR2023 - VCOR1022 Coach");
-        jPanel4.add(adminTItile, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, -1, -1));
+        adminTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        adminTitle.setForeground(new java.awt.Color(255, 255, 255));
+        adminTitle.setText("SPR2023 - VCOR1022 Coach");
+        jPanel4.add(adminTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, -1, -1));
 
         StyledDocument doc = jTextPane1.getStyledDocument();
         SimpleAttributeSet center = new SimpleAttributeSet();
@@ -418,7 +429,6 @@ public class AdminMainPage extends javax.swing.JFrame {
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
 
-        mainTable.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         mainTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Strix", "racket", "13:45 13/05", "3 days", "13:45 16/05"},
@@ -475,7 +485,8 @@ public class AdminMainPage extends javax.swing.JFrame {
             }
         });
         mainTable.setGridColor(new java.awt.Color(255, 255, 255));
-        mainTable.setRowHeight(22);
+        mainTable.setRowHeight(30);
+        mainTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(mainTable);
         if (mainTable.getColumnModel().getColumnCount() > 0) {
             mainTable.getColumnModel().getColumn(2).setPreferredWidth(30);
@@ -510,7 +521,38 @@ public class AdminMainPage extends javax.swing.JFrame {
         
         // change button
         jobButton.setText("Notify Selected Users");
-        jobButton.setForeground(Color.orange);
+        jobButton.setForeground(Color.blue);
+        
+        // change table
+        DefaultTableModel model = new DefaultTableModel();
+
+        String[] columnNames =  {"Booking ID", "User ID", "Item ID", "Quantity", "Borrow Date", "Return Date"};
+        model.setColumnIdentifiers(columnNames);
+
+        
+        // tbh
+        // retrieve the current items bookings and add to the rows
+        
+        /*
+        while (resultSet.next()) {
+        Object[] rowData = {
+            resultSet.getInt("Booking ID"),
+            resultSet.getInt("User ID"),
+            resultSet.getInt("Item ID"),
+            resultSet.getInt("Quantity"),
+            resultSet.getDate("Borrow Date"),
+            resultSet.getDate("Return Date")
+        };
+        model.addRow(rowData);
+        }
+
+        // Close the result set and statement
+        resultSet.close();
+        
+        */
+        
+        // Set the table model
+        mainTable.setModel(model);
     }//GEN-LAST:event_homeButtonMousePressed
 
     private void usersButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usersButtonMousePressed
@@ -521,6 +563,32 @@ public class AdminMainPage extends javax.swing.JFrame {
         // change button
         jobButton.setText("Add New User");
         jobButton.setForeground(Color.orange);
+        
+        // change table
+        DefaultTableModel model = new DefaultTableModel();
+
+        String[] columnNames =  {"Student ID", "Full Name", "Register Date", "User Name"};
+        model.setColumnIdentifiers(columnNames);
+
+        
+        // tbh
+        // retrieve the current items bookings and add to the rows
+        
+        /*
+        while (resultSet.next()) {
+        Object[] rowData = {
+            
+        };
+        model.addRow(rowData);
+        }
+
+        // Close the result set and statement
+        resultSet.close();
+        
+        */
+        
+        // Set the table model
+        mainTable.setModel(model);
     }//GEN-LAST:event_usersButtonMousePressed
 
     private void inventoryButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inventoryButtonMousePressed
@@ -532,6 +600,32 @@ public class AdminMainPage extends javax.swing.JFrame {
         // change button
         jobButton.setText("Add New Item"); // only delete the onces not in use
         jobButton.setForeground(Color.red);
+        
+        // change table
+        DefaultTableModel model = new DefaultTableModel();
+
+        String[] columnNames =  {"Item ID", "Item Name", "Quantity", "Condition"};
+        model.setColumnIdentifiers(columnNames);
+
+        
+        // tbh
+        // retrieve the current items bookings and add to the rows
+        
+        /*
+        while (resultSet.next()) {
+        Object[] rowData = {
+            
+        };
+        model.addRow(rowData);
+        }
+
+        // Close the result set and statement
+        resultSet.close();
+        
+        */
+        
+        // Set the table model
+        mainTable.setModel(model);
     }//GEN-LAST:event_inventoryButtonMousePressed
 
     int xx,xy;
@@ -576,21 +670,48 @@ public class AdminMainPage extends javax.swing.JFrame {
             
             case "Email Selected Users" -> 
             {
+                int rowSelected = mainTable.getSelectedRow();
+                
+                if(rowSelected == -1) // no item is selected
+                {
+                    return;
+                }
                 try 
                 {
-                    String transacctionID = "V";
+                    String bookingID = "1";  //get from selected row
+                    // get from db
+                    String borrowDate = "";
+                    String returnDate = "";
+                    int quantity = 1;
+                    String userID = "";
+                    String itemCondition= "";
                     
-                    
-                    //Get student student name and email
+                    //get username form userID
+                    String studentName = "";
+                    //Get email from userID
                     String email = "email1@example.com";
-                    String studentname = "Strix";
+                    //get student id from userID
                     String studentID = "V";
                     
+
+
+
+                    itemCondition = itemCondition.replaceAll("%", "%25");
                     
-                    
-                    String subject = "Late Notice for " + studentname;
-                    String body = "Return the fking racket bitch.";
-                    
+                    String subject = "Late Return Notice - Booking ID " + bookingID;
+
+                    String body = "Dear " + studentName + ",%0D%0A%0D%0A"
+                + "We hope this email finds you well. We are writing to inform you that we have noticed a delay in the return of certain sport equipment items that were borrowed by you from VinEquip, the sport equipment department of Vinuniversity. Your cooperation in promptly returning these items is greatly appreciated.%0D%0A%0D%0A"
+                + "Here are the details of the late items:%0D%0A%0D%0A"
+                + "Booking ID: " + bookingID + "%0D%0A"
+                + "Student ID: " + studentID + "%0D%0A"
+                + "Student Name: " + studentName + "%0D%0A%0D%0A"
+                + "Item Condition:%0D%0A"
+                + itemCondition + "%0D%0A%0D%0A"
+                + "Borrow Date: " + borrowDate + "%0D%0A"
+                + "Return Date (Expected): " + returnDate + "%0D%0A";
+
+
                     String url = "mailto:" + email + "?subject=" + subject.replaceAll(" ","%20") + "&body=" + body.replaceAll(" ", "%20");
                     java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
                 }
@@ -598,6 +719,7 @@ public class AdminMainPage extends javax.swing.JFrame {
                 {
                     JOptionPane.showMessageDialog(null, "Browsers can't be opened", "URL error", JOptionPane.ERROR_MESSAGE);
                 }
+                
             }
             case "Add New User" -> 
             {
@@ -606,7 +728,8 @@ public class AdminMainPage extends javax.swing.JFrame {
             }
             case "Add New Item" -> 
             {
-                
+                AddItem it = new AddItem();
+                it.setVisible(true);
             }
             default -> {
             }
@@ -670,7 +793,7 @@ public class AdminMainPage extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel adminName;
-    private javax.swing.JLabel adminTItile;
+    private javax.swing.JLabel adminTitle;
     private javax.swing.JLabel dateLabel;
     private javax.swing.JLabel dayLabel;
     private javax.swing.JPanel homeButton;

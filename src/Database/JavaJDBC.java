@@ -18,18 +18,21 @@ public class JavaJDBC {
     /**
      * $param args the comand line arguments
      */
-    public static void main(String[] args) {
-        Connection connection = null;
-        PreparedStatement pst=null;
-        ResultSet rs=null;
-        String url="jdbc:mysql://localhost:3306/inventoryforsports";
-        String UserName="root";
-        String password="Hbtchou123";
+    
+    static Connection connection = null;
+    static PreparedStatement pst=null;
+    static ResultSet rs=null;
+    
+    static String url="jdbc:mysql://localhost:3306/inventoryforsports";
+    static String UserName="root";
+    static String password="Hbtchou123";
+    
+    public static void main(String[] args) { 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection=DriverManager.getConnection(url,UserName, password);
             //System.out.println(connection);
-            pst=connection.prepareStatement("select * from user");
+            pst=connection.prepareStatement("select * from users");
             rs=pst.executeQuery();
             while(rs.next()) {
                 System.out.println(rs.getString(1) + " " +
@@ -43,5 +46,50 @@ public class JavaJDBC {
         } catch (SQLException ex) {
             Logger.getLogger(JavaJDBC.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public Connection getConn() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(url, UserName, password);
+            System.out.println("Connected successfully.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return connection;
+    }
+    
+    public boolean userLogin(String username, String password) {
+        String query = "SELECT * FROM users WHERE userName="
+                + "'" + username + "'"
+                + " AND password="
+                + "'" + password + "'" + ";";
+        System.out.println(query);
+        try {
+            pst=getConn().prepareStatement(query);
+            rs = pst.executeQuery();
+            if(rs.next()) return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        
+        return false;
+    }
+    
+    public boolean adminLogin(String username, String password) {
+        String query = "SELECT * FROM admins WHERE userName="
+                + '"' + username + '"'
+                + " AND password="
+                + '"' + password + '"' + ";";
+        
+        try {
+            pst=getConn().prepareStatement(query);
+            rs = pst.executeQuery();
+            if(rs.next()) return true;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        
+        return false;
     }
 }

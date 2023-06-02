@@ -1,6 +1,13 @@
 import java.awt.Taskbar;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import Database.JavaJDBC;
+import java.sql.ResultSet;
+import com.sportsinventory.DAO.AdminDAO;
+import com.sportsinventory.DAO.UserDAO;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -159,39 +166,52 @@ public class HomePage extends javax.swing.JFrame {
      
     }//GEN-LAST:event_usernameFieldActionPerformed
 
+    
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         // TODO add your handling code here:
-        if(usernameField.getText().equals(""))
+        
+        String username = usernameField.getText();
+        String password = passwordFIeld.getText();
+        
+        if(username.equals(""))
         {
             JOptionPane.showMessageDialog(null,"Please enter your username!");
         }
-        else if(passwordFIeld.getText().equals(""))
+        else if(password.equals(""))
         {
             JOptionPane.showMessageDialog(null,"Please enter your password!");
         }
-        else if (!usernameField.getText().equals("Strix"))
+        else if(new JavaJDBC().adminLogin(username, password))
         {
-            JOptionPane.showMessageDialog(null, "Username doesnt exist");
-        }
-        else if(passwordFIeld.getText().contains("1"))
-        {
+            ResultSet rs = new AdminDAO().getAdminDAO(username);
             super.dispose();
-            AdminMainPage adminMainPage = new AdminMainPage();
-            adminMainPage.setVisible(true);           
+            AdminMainPage adminMainPage = null;
+            try {
+                if (rs.next())
+                    adminMainPage = new AdminMainPage(rs.getString("fullname"), "COHORT3 CECS");
+            } catch (SQLException ex) {
+                Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (adminMainPage != null) adminMainPage.setVisible(true);           
         }
-        else if(!passwordFIeld.getText().contains("0"))
+        else if(new JavaJDBC().userLogin(username, password))
         {
-            JOptionPane.showMessageDialog(null, "Wrong Password", "Whats this for?", JOptionPane.ERROR_MESSAGE);
+            ResultSet rs = new UserDAO().getUserDAO(username);
+            super.dispose();
+            AtheleteMainPage atheleteMainPage = null;
+            try {
+                if (rs.next())
+                    atheleteMainPage = new AtheleteMainPage(rs.getString("fullname"), "COHORT3 CECS");
+            } catch (SQLException ex) {
+                Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (atheleteMainPage != null) atheleteMainPage.setVisible(true);
         }
-        
         else
         {
-            super.dispose();
-            AtheleteMainPage atheleteMainPage = new AtheleteMainPage();
-            atheleteMainPage.setVisible(true);
-        }
-                    
-        
+            System.out.println(username + " " + password);
+            JOptionPane.showMessageDialog(null, "Invalid username or password.");
+        }            
     }//GEN-LAST:event_loginActionPerformed
 
     /**
