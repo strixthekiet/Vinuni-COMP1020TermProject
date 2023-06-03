@@ -9,28 +9,43 @@
  */
 import java.time.format.DateTimeFormatter;  
 import java.time.LocalDateTime;    
-
+import com.toedter.calendar.JDateChooser;
+import javax.swing.JOptionPane;
+import com.sportsinventory.DAO.BookingDAO;
+import com.sportsinventory.DTO.BookingDTO;
+import com.sportsinventory.DAO.ItemDAO;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 public class Confirmation extends javax.swing.JFrame {
 
     /**
      * Creates new form Confirmation
      */
     public int maxQuantity = 0;
+    public int itemIDString = 0;
+    public String itemNameString = "";
+    public int userID = 0;
     public Confirmation()
     {
         initComponents();
     }
-    public Confirmation(String itemName, String ID, String stock) {
+    public Confirmation(String itemName, String ID, String stock, int _userID) {
         initComponents();
+        dateChooser.setDateFormatString("YYY-MM-dd");
         // change item name, item id here
         ItemIDLabel.setText(ID);
         ItemNameLabel.setText(itemName);
+        itemNameString = itemName;
+        itemIDString = Integer.parseInt(ID);
         maxQuantity = Integer.parseInt(stock);
+        userID = _userID;
         
         
         
         // update borrow Date
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d MMM YYY - HH:mm");  
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("YYY-MM-dd ");  
         LocalDateTime now = LocalDateTime.now();  
         String borrowDateString = dtf.format(now);
         BorrowDateField.setText(borrowDateString);
@@ -63,7 +78,7 @@ public class Confirmation extends javax.swing.JFrame {
         ItemNameLabel = new javax.swing.JLabel();
         confirmButton = new javax.swing.JButton();
         ItemIDLabel = new javax.swing.JLabel();
-        BorrowDateField1 = new javax.swing.JLabel();
+        dateChooser = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(400, 300));
@@ -266,10 +281,6 @@ public class Confirmation extends javax.swing.JFrame {
         ItemIDLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ItemIDLabel.setText("ID from DB");
 
-        BorrowDateField1.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
-        BorrowDateField1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        BorrowDateField1.setText("Current Time/date");
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -281,14 +292,16 @@ public class Confirmation extends javax.swing.JFrame {
                         .addComponent(QuantityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(ItemIDLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ItemNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BorrowDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(BorrowDateField1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(confirmButton, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                            .addComponent(dateChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(BorrowDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -301,9 +314,9 @@ public class Confirmation extends javax.swing.JFrame {
                 .addComponent(QuantityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(7, 7, 7)
                 .addComponent(BorrowDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BorrowDateField1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(dateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12))
         );
@@ -315,9 +328,41 @@ public class Confirmation extends javax.swing.JFrame {
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         // TODO add your handling code here:
-        //
-        
-        
+        String dateBorrowString = BorrowDateField.getText();
+        String dateReturnString = dateChooser.getDate().toString();
+        int quantityInt = Integer.parseInt(QuantityTextField.getText());
+        if(quantityInt > maxQuantity)
+        {
+            JOptionPane.showMessageDialog(null, "Maximum quantity is " + maxQuantity);
+            return;
+        }
+        else
+        {
+            try {
+                ResultSet rs = new BookingDAO().getLastRow();
+                int bookingID = 100;
+                try {
+                    if (rs.next()) {
+                        bookingID = rs.getInt("bookingID") + 1;
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(Confirmation.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                new BookingDAO().addBookingDAO(bookingID, userID, itemIDString, dateBorrowString, dateBorrowString, "False", quantityInt);
+                
+                ResultSet rs2 = new ItemDAO().getItemIDRow(itemIDString);
+                int quantityLeft = 0;
+                if (rs2.next()) {
+                    quantityLeft = rs2.getInt("quantity") - quantityInt;
+                }
+                
+                new ItemDAO().updateQuantity(quantityLeft, itemIDString);
+                
+                super.dispose();
+            } catch (SQLException ex) {
+                Logger.getLogger(Confirmation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_confirmButtonActionPerformed
 
     private void QuantityTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QuantityTextFieldActionPerformed
@@ -386,7 +431,6 @@ public class Confirmation extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BorrowDateField;
-    private javax.swing.JLabel BorrowDateField1;
     private javax.swing.JLabel BorrowDateTetx;
     private javax.swing.JLabel ItemIDLabel;
     private javax.swing.JLabel ItemNameLabel;
@@ -394,6 +438,7 @@ public class Confirmation extends javax.swing.JFrame {
     private javax.swing.JTextField QuantityTextField;
     private javax.swing.JLabel ReturnDateText;
     private javax.swing.JButton confirmButton;
+    private com.toedter.calendar.JDateChooser dateChooser;
     private javax.swing.JLabel itemIDText;
     private javax.swing.JLabel itemNameText;
     private javax.swing.JPanel jPanel1;

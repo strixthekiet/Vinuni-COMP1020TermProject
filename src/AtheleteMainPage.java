@@ -1,9 +1,15 @@
 
+import com.sportsinventory.DAO.BookingDAO;
+import com.sportsinventory.DAO.ItemDAO;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 import javax.swing.RowFilter;
 import javax.swing.Timer;
@@ -28,6 +34,7 @@ public class AtheleteMainPage extends javax.swing.JFrame {
     /**
      * Creates new form AtheleteMainPage
      */
+    public int userID;
     public AtheleteMainPage() {
         initComponents();
         setColor(homeButton); 
@@ -38,13 +45,14 @@ public class AtheleteMainPage extends javax.swing.JFrame {
         dt();
     }
     
-    public AtheleteMainPage(String _userName, String _userDescript) {
+    public AtheleteMainPage(String _userName, String _userDescript, int _userID) {
         initComponents();
         setColor(homeButton);
         
         userName.setText(_userName);
         userTitle.setText(_userDescript);
         
+        userID = _userID;
         idnHomeButton.setOpaque(true);
         resetColor(new JPanel[]{inventoryButton}, new JPanel[]{idnInventoryButton});
         jobButton.setForeground(Color.orange);
@@ -145,7 +153,7 @@ public class AtheleteMainPage extends javax.swing.JFrame {
         jTextPane1.setText("1. \nBadminton Racket\nLate: 3 days 2 hours\nNguyen Don The Kiet \n\n2.\nBadminton Racket\nLate: 3 days 2 hours\nNguyen Don The Kiet\n\n3.\nBadminton Racket\nLate: 3 days 2 hours\nNguyen Don The Kiet \n");
         jScrollPane3.setViewportView(jTextPane1);
 
-        jobButton.setText("Return Selected Items");
+        jobButton.setText("Return Selected Item");
         jobButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jobButtonActionPerformed(evt);
@@ -449,13 +457,63 @@ public class AtheleteMainPage extends javax.swing.JFrame {
         setColor(homeButton);
         idnHomeButton.setOpaque(true);
         resetColor(new JPanel[]{inventoryButton}, new JPanel[]{idnInventoryButton});
-        
-        // change database
-        
-        
         // change button
         jobButton.setText("Return Selected Item");
         jobButton.setForeground(Color.orange);
+        
+        // change table
+        DefaultTableModel model = new DefaultTableModel();
+
+        String[] columnNames =  {"Booking ID", "Item ID", "Item Name", "Condtion", "Quantity", "Borrow Date", "Return Date"};
+        model.setColumnIdentifiers(columnNames);
+        
+        ResultSet resultSet = new BookingDAO().getBookingsTable();
+
+        // tbh
+        // retrieve the current items bookings and add to the rows
+        try {
+            while (resultSet.next()) {
+                int _userID = resultSet.getInt("userID");
+         
+                if(userID == _userID)
+                {
+                    ResultSet rsItem = null;
+                    int _itemID = resultSet.getInt("itemID");
+                    rsItem = new ItemDAO().getItemIDRow(_itemID);
+                    
+                    String condition = "";
+                    String itemName = "";
+                    if (rsItem.next()) 
+                    {
+                        condition = rsItem.getString("condition");
+                        itemName = rsItem.getString("name");
+                    }
+                     
+                    Object[] rowData = {
+                        resultSet.getInt("bookingID"),
+                        resultSet.getInt("itemID"),
+                        itemName,
+                        condition,
+                        resultSet.getInt("Quantity"),
+                        resultSet.getDate("borrowDate"),
+                        resultSet.getDate("borrowReturn")
+                    };
+                    model.addRow(rowData);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminMainPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            // Close the result set and statement
+            resultSet.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminMainPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        // Set the table model
+        mainTable.setModel(model);
        
     }//GEN-LAST:event_homeButtonMousePressed
 
@@ -464,13 +522,42 @@ public class AtheleteMainPage extends javax.swing.JFrame {
         setColor(inventoryButton);
         idnInventoryButton.setOpaque(true);
         resetColor(new JPanel[]{homeButton}, new JPanel[]{idnHomeButton});
-        
-        // change database
-        
-        
         // change button
         jobButton.setText("Borrow Selected Item");
         jobButton.setForeground(Color.black);
+        
+        
+        // change table
+        DefaultTableModel model = new DefaultTableModel();
+
+        String[] columnNames =  {"Item ID", "Item Name", "Condtion", "Quantity"};
+        model.setColumnIdentifiers(columnNames);
+        
+        ResultSet resultSet = new ItemDAO().getItemTable();
+        
+
+        try {
+            while (resultSet.next()) 
+            {
+                int _quantity = resultSet.getInt("quantity");
+                if(_quantity <= 0)
+                    continue;
+                Object[] rowData = {
+                        resultSet.getInt("itemID"),
+                        resultSet.getString("name"),
+                        resultSet.getString("condition"),
+                        _quantity
+                    };
+                model.addRow(rowData);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AtheleteMainPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        // Set the table model
+        mainTable.setModel(model);
+        
+        
     }//GEN-LAST:event_inventoryButtonMousePressed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
@@ -506,16 +593,17 @@ public class AtheleteMainPage extends javax.swing.JFrame {
         {
             
         }
-        else
+        else if(jobButton.getText().equals("Borrow Selected Item"))
         {
             int row = mainTable.getSelectedRow();
+            if(row == -1)
+                return;
             String itemName = mainTable.getModel().getValueAt(row, 1).toString();
             String ID = mainTable.getModel().getValueAt(row,0).toString();
-            String quantity = mainTable.getModel().getValueAt(row,5).toString();
+            String quantity = mainTable.getModel().getValueAt(row,3).toString();
             
-            Confirmation cf = new Confirmation(itemName, ID, quantity );
+            Confirmation cf = new Confirmation(itemName, ID, quantity, userID);
             cf.setVisible(true);
-            
         }
     }//GEN-LAST:event_jobButtonActionPerformed
 

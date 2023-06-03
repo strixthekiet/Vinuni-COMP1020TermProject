@@ -67,7 +67,7 @@ public class AdminMainPage extends javax.swing.JFrame {
         // change table
         DefaultTableModel model = new DefaultTableModel();
 
-        String[] columnNames =  {"Booking ID", "User ID", "Item ID", "Quantity", "Borrow Date", "Return Date"};
+        String[] columnNames =  {"Booking ID", "User ID", "Item ID", "Quantity", "Borrow Date", "Return Date", "Done"};
         model.setColumnIdentifiers(columnNames);
         
         ResultSet resultSet = new BookingDAO().getBookingsTable();
@@ -82,7 +82,8 @@ public class AdminMainPage extends javax.swing.JFrame {
                     resultSet.getInt("itemID"),
                     resultSet.getInt("Quantity"),
                     resultSet.getDate("borrowDate"),
-                    resultSet.getDate("borrowReturn")
+                    resultSet.getDate("borrowReturn"),
+                    resultSet.getString("status")
                 };
                 model.addRow(rowData);
             }
@@ -572,7 +573,7 @@ public class AdminMainPage extends javax.swing.JFrame {
         // change table
         DefaultTableModel model = new DefaultTableModel();
 
-        String[] columnNames =  {"Booking ID", "User ID", "Item ID", "Quantity", "Borrow Date", "Return Date"};
+        String[] columnNames =  {"Booking ID", "User ID", "Item ID", "Quantity", "Borrow Date", "Return Date", "Done"};
         model.setColumnIdentifiers(columnNames);
         
         ResultSet resultSet = new BookingDAO().getBookingsTable();
@@ -587,7 +588,8 @@ public class AdminMainPage extends javax.swing.JFrame {
                     resultSet.getInt("itemID"),
                     resultSet.getInt("Quantity"),
                     resultSet.getDate("borrowDate"),
-                    resultSet.getDate("borrowReturn")
+                    resultSet.getDate("borrowReturn"),
+                    resultSet.getString("status")
                 };
                 model.addRow(rowData);
             }

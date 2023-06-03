@@ -2,7 +2,7 @@ package com.sportsinventory.DTO;
 
 public class BookingDTO {
     private int bookingID, userID, itemID;
-    private String borrowDate, borrowReturn;
+    private String borrowDate, borrowReturn, status;
 
     public int getBookingID() {
         return bookingID;
@@ -33,5 +33,13 @@ public class BookingDTO {
     }
     public void setBorrowReturn(String borrowReturn) {
         this.borrowReturn = borrowReturn;
+    }
+    
+    public String getStatus() {
+        return status;
+    }
+    
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

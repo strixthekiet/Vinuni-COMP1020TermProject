@@ -100,6 +100,16 @@ public class ItemDAO {
             e.printStackTrace();
         }
     }
+    
+        public void updateQuantity(int quantity, int itemID){
+        try {
+            String query = "Update items set quantity=" + quantity + " Where itemID=" + itemID;
+            prepStatement = conn.prepareStatement(query);
+            prepStatement.executeUpdate();
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
 
     public ResultSet getQueryResult() {
         try {
@@ -152,7 +162,26 @@ public class ItemDAO {
         }
         return resultSet;
     }
-
+    
+    public ResultSet getItemIDRow(int itemID) {
+        try {
+            String query = "Select * from items where itemID=" + itemID;
+            resultSet = statement.executeQuery(query);
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+        return resultSet;
+    }
+    
+    public ResultSet getUserIDRow(int userID) {
+        try {
+            String query = "Select * from items where itemID=" + userID;
+            resultSet = statement.executeQuery(query);
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+        return resultSet;
+    }
 
     public DefaultTableModel buildTableModel(ResultSet resultSet) throws SQLException {
         ResultSetMetaData metaData = resultSet.getMetaData();
