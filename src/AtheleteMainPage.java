@@ -454,7 +454,7 @@ public class AtheleteMainPage extends javax.swing.JFrame {
         
         
         // change button
-        jobButton.setText("Return Selected Items");
+        jobButton.setText("Return Selected Item");
         jobButton.setForeground(Color.orange);
        
     }//GEN-LAST:event_homeButtonMousePressed
@@ -469,7 +469,7 @@ public class AtheleteMainPage extends javax.swing.JFrame {
         
         
         // change button
-        jobButton.setText("Borrow Selected Items");
+        jobButton.setText("Borrow Selected Item");
         jobButton.setForeground(Color.black);
     }//GEN-LAST:event_inventoryButtonMousePressed
 
@@ -502,7 +502,7 @@ public class AtheleteMainPage extends javax.swing.JFrame {
 
     private void jobButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jobButtonActionPerformed
         // TODO add your handling code here:
-        if(jobButton.getText().equals("Return Selected Items"))
+        if(jobButton.getText().equals("Return Selected Item"))
         {
             
         }

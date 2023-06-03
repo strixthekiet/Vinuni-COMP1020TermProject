@@ -51,16 +51,54 @@ public class AdminMainPage extends javax.swing.JFrame {
     
     public AdminMainPage(String _adminName, String _adminDescript) {
         initComponents();
+        times();
+        dt();
         setColor(homeButton); 
+        ind_1.setOpaque(true);
+        resetColor(new JPanel[]{usersButton,inventoryButton}, new JPanel[]{ind_3, ind_4});
         
         adminName.setText(_adminName);
         adminTitle.setText(_adminDescript);
         
-        ind_1.setOpaque(true);
-        resetColor(new JPanel[]{usersButton,inventoryButton}, new JPanel[]{ind_3, ind_4});
-        jobButton.setForeground(Color.orange);
-        times();
-        dt();
+        // change button
+        jobButton.setText("Email Selected User");
+        jobButton.setForeground(Color.blue);
+        
+        // change table
+        DefaultTableModel model = new DefaultTableModel();
+
+        String[] columnNames =  {"Booking ID", "User ID", "Item ID", "Quantity", "Borrow Date", "Return Date"};
+        model.setColumnIdentifiers(columnNames);
+        
+        ResultSet resultSet = new BookingDAO().getBookingsTable();
+        
+        // tbh
+        // retrieve the current items bookings and add to the rows
+        try {
+            while (resultSet.next()) {
+                Object[] rowData = {
+                    resultSet.getInt("bookingID"),
+                    resultSet.getInt("userID"),
+                    resultSet.getInt("itemID"),
+                    resultSet.getInt("Quantity"),
+                    resultSet.getDate("borrowDate"),
+                    resultSet.getDate("borrowReturn")
+                };
+                model.addRow(rowData);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminMainPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            // Close the result set and statement
+            resultSet.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminMainPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        // Set the table model
+        mainTable.setModel(model);
     }
     
     public void dt()
@@ -789,7 +827,7 @@ public class AdminMainPage extends javax.swing.JFrame {
                 }
                 
                 
-                AddItem it = new AddItem(lastID);
+                AddItem it = new AddItem(lastID + 1);
                 it.setVisible(true);
             }
             default -> {

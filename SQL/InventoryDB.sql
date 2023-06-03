@@ -14,7 +14,7 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
                          `userID` int NOT NULL,
                          `userName` varchar(20) NOT NULL,
-                         `name` varchar(50) NOT NULL,
+                         `fullname` varchar(50) NOT NULL,
                          `email` varchar(50) NOT NULL,
                          `password` varchar(50) NOT NULL,
                          `regDate` date NOT NULL,
@@ -60,7 +60,7 @@ DROP TABLE IF EXISTS `admins`;
 CREATE TABLE `admins` (
                           `adminID` int NOT NULL AUTO_INCREMENT,
                           `userName` varchar(20) NOT NULL,
-                          `name` varchar(50) NOT NULL,
+                          `fullname` varchar(50) NOT NULL,
                           `email` varchar(50) NOT NULL,
                           `password` varchar(50) NOT NULL,
                           `regDate` date NOT NULL,

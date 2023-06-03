@@ -59,11 +59,12 @@ public class ItemDAO {
     }
     public void addFunction(ItemDTO itemDTO) {
         try {
-            String query = "INSERT INTO items VALUES(null,?,?,?)";
+            String query = "INSERT INTO items VALUES(?,?,?,?)";
             prepStatement = conn.prepareStatement(query);
-            prepStatement.setString(1, itemDTO.getItemName());
-            prepStatement.setString(2, itemDTO.getCondition());
-            prepStatement.setInt(3, itemDTO.getQuantity());
+            prepStatement.setInt(1, itemDTO.getItemID());
+            prepStatement.setString(2, itemDTO.getItemName());
+            prepStatement.setString(3, itemDTO.getCondition());
+            prepStatement.setInt(4, itemDTO.getQuantity());
 
             prepStatement.executeUpdate();
         } catch (SQLException throwables) {

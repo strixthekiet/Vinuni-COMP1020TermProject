@@ -188,7 +188,7 @@ public class HomePage extends javax.swing.JFrame {
             AdminMainPage adminMainPage = null;
             try {
                 if (rs.next())
-                    adminMainPage = new AdminMainPage(rs.getString("fullname"), "COHORT3 CECS");
+                    adminMainPage = new AdminMainPage(rs.getString("fullname"), "Swimming PT");
             } catch (SQLException ex) {
                 Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
             }
