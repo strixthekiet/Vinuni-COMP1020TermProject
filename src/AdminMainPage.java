@@ -528,7 +528,7 @@ public class AdminMainPage extends javax.swing.JFrame {
         resetColor(new JPanel[]{usersButton,inventoryButton}, new JPanel[]{ind_3, ind_4});
         
         // change button
-        jobButton.setText("Notify Selected Users");
+        jobButton.setText("Email Selected User");
         jobButton.setForeground(Color.blue);
         
         // change table
@@ -699,7 +699,7 @@ public class AdminMainPage extends javax.swing.JFrame {
         // TODO add your handling code here:
         switch(jobButton.getText())
         {
-            case "Email Selected Users" -> 
+            case "Email Selected User" -> 
             {
                 int rowSelected = mainTable.getSelectedRow();
                 
@@ -709,24 +709,44 @@ public class AdminMainPage extends javax.swing.JFrame {
                 }
                 try 
                 {
-                    String bookingID = "1";  //get from selected row
+                    int rowSelect = mainTable.getSelectedRow();
+                    String bookingID = mainTable.getValueAt(rowSelect, 0).toString();  //get from selected row
+                   
                     // get from db
+                    
+                    ResultSet rs = new BookingDAO().getBookingsRowInfo(Integer.parseInt(bookingID));
+                    
                     String borrowDate = "";
                     String returnDate = "";
                     int quantity = 1;
-                    String userID = "";
-                    String itemCondition= "";
+                    int userID = 0;
+                    String itemCondition= "good";
                     
-                    //get username form userID
+                    try {
+                        if (rs.next()) {
+                            borrowDate = rs.getDate("borrowDate").toString();
+                            returnDate = rs.getDate("borrowReturn").toString();
+                            quantity = rs.getInt("quantity");
+                            userID = rs.getInt("userID");
+                        }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(AdminMainPage.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    ResultSet rs2 = new UserDAO().getUserInfo(userID);
                     String studentName = "";
-                    //Get email from userID
                     String email = "email1@example.com";
-                    //get student id from userID
-                    String studentID = "V";
+                    String studentID = "V" + userID;
                     
-
-
-
+                    try {
+                        if (rs2.next()) {
+                            studentName = rs2.getString("fullname");
+                            email = rs2.getString("email");
+                        }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(AdminMainPage.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
                     itemCondition = itemCondition.replaceAll("%", "%25");
                     
                     String subject = "Late Return Notice - Booking ID " + bookingID;
@@ -759,7 +779,17 @@ public class AdminMainPage extends javax.swing.JFrame {
             }
             case "Add New Item" -> 
             {
-                AddItem it = new AddItem();
+                int lastID = 0;
+                ResultSet rs = new ItemDAO().getLastRow();
+                try{ 
+                    if (rs.next())
+                        lastID = rs.getInt("itemID");
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdminMainPage.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                
+                AddItem it = new AddItem(lastID);
                 it.setVisible(true);
             }
             default -> {

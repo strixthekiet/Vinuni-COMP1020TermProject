@@ -15,9 +15,15 @@ public class AddItem extends javax.swing.JFrame {
     /**
      * Creates new form AddItem
      */
-    
-    public AddItem() {
+    public AddItem()
+    {
         initComponents();
+    }
+    public AddItem(int ID) {
+        
+        initComponents();
+        String IDString = String.valueOf(ID);
+        itemID.setText(IDString);
     }
 
     /**
@@ -213,6 +219,8 @@ public class AddItem extends javax.swing.JFrame {
 
         quantity.setFont(new java.awt.Font("Helvetica Neue", 0, 20)); // NOI18N
         quantity.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        quantity.setText("00");
+        quantity.setMaximumSize(new java.awt.Dimension(64, 32));
         quantity.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 quantityFocusLost(evt);

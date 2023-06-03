@@ -95,6 +95,16 @@ public class BookingDAO {
         }
         return resultSet;
     }
+    
+    public ResultSet getBookingsRowInfo(int requireID) {
+        try {
+            String query = "Select * from bookings where bookingID=" + requireID;
+            resultSet = statement.executeQuery(query);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return resultSet;
+    }
 
     public DefaultTableModel buildTableModel(ResultSet resultSet) throws SQLException {
         ResultSetMetaData metaData = resultSet.getMetaData();

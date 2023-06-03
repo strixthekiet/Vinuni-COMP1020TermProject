@@ -141,6 +141,16 @@ public class ItemDAO {
         }
         return resultSet;
     }
+    
+    public ResultSet getLastRow() {
+        try {
+            String query = "Select * from items order by itemID DESC LIMIT 1";
+            resultSet = statement.executeQuery(query);
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+        return resultSet;
+    }
 
 
     public DefaultTableModel buildTableModel(ResultSet resultSet) throws SQLException {

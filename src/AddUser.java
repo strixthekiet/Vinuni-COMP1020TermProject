@@ -18,6 +18,8 @@ public class AddUser extends javax.swing.JFrame {
     /**
      * Creates new form AddUser
      */
+    public boolean flag1 = false;
+    public boolean flag2 = false;
     public AddUser() {
         initComponents();
         
@@ -58,6 +60,7 @@ public class AddUser extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add User");
+        setMaximumSize(new java.awt.Dimension(400, 300));
         setMinimumSize(new java.awt.Dimension(400, 300));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -373,7 +376,7 @@ public class AddUser extends javax.swing.JFrame {
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         // TODO add your handling code here:
         String IDString = studentID.getText();
-        IDString = IDString.substring(1, IDString.length() - 1);
+        IDString = IDString.substring(1, IDString.length());
         
         int studentIDString = Integer.parseInt(IDString);
         String studentNameString = studentName.getText();
@@ -386,7 +389,12 @@ public class AddUser extends javax.swing.JFrame {
         UserDTO user = new UserDTO();
         user.setUserID(studentIDString);
         user.setEmail(studentEmailString);
-        user.setRegDate("2023-06-03");
+        
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("YYY-MM-dd");  
+        LocalDateTime now = LocalDateTime.now();  
+        String regDate = dtf.format(now);
+        user.setRegDate(regDate);
+        
         user.setFullName(studentNameString);
         
         String[] arr = studentNameString.split(" ");
@@ -395,10 +403,16 @@ public class AddUser extends javax.swing.JFrame {
         user.setPassword(usrName);
         
         new UserDAO().addFunction(user);
+        if(flag1 && flag2)
+        {
+            super.dispose();
+        }
+        
     }//GEN-LAST:event_confirmButtonActionPerformed
 
     private void studentIDFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_studentIDFocusLost
         // TODO add your handling code here:
+        flag1 = false;
         String text = studentID.getText();
        
         if(text.charAt(0) != 'V')
@@ -414,16 +428,21 @@ public class AddUser extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "StudentID is not correct!");
         }
         else{
-            // tbh
+            flag1 = true;
         }
+        
     }//GEN-LAST:event_studentIDFocusLost
 
     private void studentEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_studentEmailFocusLost
         // TODO add your handling code here:
+        flag2 = false;
         String text = studentEmail.getText();
         if(!text.endsWith("@vinuni.edu.vn") )
         {
             JOptionPane.showMessageDialog(null, "The email must ends with @vinuni.edu.vn");
+        }
+        else{
+            flag2 = true;
         }
     }//GEN-LAST:event_studentEmailFocusLost
 

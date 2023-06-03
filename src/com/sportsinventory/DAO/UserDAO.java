@@ -107,6 +107,16 @@ public class UserDAO {
         }
         return resultSet;
     }
+    
+    public ResultSet getUserInfo(int ID) {
+        try {
+            String query = "SELECT * FROM users WHERE userID=" +ID;
+            resultSet = statement.executeQuery(query);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return resultSet;
+    }
 
     public ResultSet getPassDAO(String userName, String password){
         try {
