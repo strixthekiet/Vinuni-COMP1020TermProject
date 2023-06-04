@@ -20,7 +20,6 @@ VinEquip is a desktop-based application designed to provide a convenient and use
 - Admin Dashboard: The system should provide an admin dashboard where the administrator can cancel booking sports items, view booking history, and manage users.
 - Add Sports Items: The system should allow the administrator to add new sports items to the system.
 - Edit Sports Items: The system should allow the administrator to edit existing sports items, such as changing the name, description, or availability.
-- Delete Sports Items: The system should allow the administrator to delete sports items that are no longer in use.
 - Manage Users: The system should allow the administrator to manage user accounts, including creating new accounts.
 
 ## Benefits
