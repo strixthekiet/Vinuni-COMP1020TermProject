@@ -361,6 +361,8 @@ public class AddItem extends javax.swing.JFrame {
         item.setCondition(itemConditionString);
         
         new ItemDAO().addFunction(item);
+        
+        super.dispose();
     }//GEN-LAST:event_confirmButtonActionPerformed
 
     private void quantityFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_quantityFocusLost
