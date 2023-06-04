@@ -67,6 +67,16 @@ public class BookingDAO {
         }
     }
     
+    public void updateStatus(int bookingID){
+        try {
+            String query = "Update bookings set status=done Where bookingID=" + bookingID;
+            prepStatement = conn.prepareStatement(query);
+            prepStatement.executeUpdate();
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+    
     // Book table data set retrieval
     public ResultSet getBookings() {
         try {

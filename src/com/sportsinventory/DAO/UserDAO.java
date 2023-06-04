@@ -45,8 +45,8 @@ public class UserDAO {
             String resQuery = "SELECT * FROM users";
             resultSet = statement.executeQuery(resQuery);
 
-            String query = "INSERT INTO users (userID,userName,fullname,email,password,regDate) " +
-                    "VALUES(?,?,?,?,?,?)";
+            String query = "INSERT INTO users (userID,userName,fullname,email,password,regDate,cohort,major) " +
+                    "VALUES(?,?,?,?,?,?,?,?)";
             prepStatement = conn.prepareStatement(query);
             prepStatement.setInt(1, userDTO.getUserID());
             prepStatement.setString(2, userDTO.getUsername());
@@ -54,6 +54,8 @@ public class UserDAO {
             prepStatement.setString(4, userDTO.getEmail());
             prepStatement.setString(5, userDTO.getPassword());
             prepStatement.setString(6, userDTO.getRegDate());
+            prepStatement.setString(7, userDTO.getCohort());
+            prepStatement.setString(8, userDTO.getMajor());
             prepStatement.executeUpdate();
 
         } catch (Exception ex){

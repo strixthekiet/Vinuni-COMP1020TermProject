@@ -42,8 +42,6 @@ public class Confirmation extends javax.swing.JFrame {
         maxQuantity = Integer.parseInt(stock);
         userID = _userID;
         
-        
-        
         // update borrow Date
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("YYY-MM-dd ");  
         LocalDateTime now = LocalDateTime.now();  

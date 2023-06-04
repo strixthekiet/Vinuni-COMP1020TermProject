@@ -451,6 +451,8 @@ public class AddUser extends javax.swing.JFrame {
         String usrName = arr[arr.length - 1];
         user.setUsername(usrName);
         user.setPassword(usrName);
+        user.setCohort(cohortString);
+        user.setMajor(major);
         
         new UserDAO().addFunction(user);
         if(flag1 && flag2)
