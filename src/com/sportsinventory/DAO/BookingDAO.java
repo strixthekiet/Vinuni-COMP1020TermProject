@@ -67,9 +67,9 @@ public class BookingDAO {
         }
     }
     
-    public void updateStatus(int bookingID){
+    public void updateStatus(int bookingID, String status){
         try {
-            String query = "Update bookings set status=done Where bookingID=" + bookingID;
+            String query = "Update bookings set status='" + status + "' Where bookingID=" + bookingID;
             prepStatement = conn.prepareStatement(query);
             prepStatement.executeUpdate();
         } catch (SQLException e){

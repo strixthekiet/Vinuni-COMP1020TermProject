@@ -16,12 +16,13 @@ public class AddItem extends javax.swing.JFrame {
     /**
      * Creates new form AddItem
      */
+    public AdminMainPage admin;
     public AddItem()
     {
         initComponents();
     }
-    public AddItem(int ID) {
-        
+    public AddItem(int ID, AdminMainPage _admin) {
+        admin = _admin;
         initComponents();
         String IDString = String.valueOf(ID);
         itemID.setText(IDString);
@@ -346,7 +347,6 @@ public class AddItem extends javax.swing.JFrame {
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         // TODO add your handling code here:
         //
-        
         String IDString = itemID.getText();
         int itemIDString = Integer.parseInt(IDString);
         String itemNameString = itemName.getText();
@@ -362,6 +362,7 @@ public class AddItem extends javax.swing.JFrame {
         
         new ItemDAO().addFunction(item);
         
+        admin.inventoryButtonPressSom();
         super.dispose();
     }//GEN-LAST:event_confirmButtonActionPerformed
 

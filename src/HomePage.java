@@ -188,7 +188,7 @@ public class HomePage extends javax.swing.JFrame {
             AdminMainPage adminMainPage = null;
             try {
                 if (rs.next())
-                    adminMainPage = new AdminMainPage(rs.getString("fullname"), "Swimming PT");
+                    adminMainPage = new AdminMainPage(rs.getString("fullname"), rs.getString("description"));
             } catch (SQLException ex) {
                 Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -209,6 +209,7 @@ public class HomePage extends javax.swing.JFrame {
                         descripString = rs.getString("cohort") + " " + rs.getString("major");
                     
                     atheleteMainPage = new AtheleteMainPage(rs.getString("fullname"), descripString, rs.getInt("userID"));
+                    atheleteMainPage.homeButtonPressSom();
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);

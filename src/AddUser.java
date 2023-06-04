@@ -20,9 +20,19 @@ public class AddUser extends javax.swing.JFrame {
      */
     public boolean flag1 = false;
     public boolean flag2 = false;
+    public AdminMainPage admin;
     public AddUser() {
         initComponents();
         
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d MMM YYY");  
+        LocalDateTime now = LocalDateTime.now();  
+        String borrowDateString = dtf.format(now);
+        CreatedDateField.setText(borrowDateString);
+    }
+    
+    public AddUser(AdminMainPage _admin) {
+        initComponents();
+        admin = _admin;
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d MMM YYY");  
         LocalDateTime now = LocalDateTime.now();  
         String borrowDateString = dtf.format(now);
@@ -457,6 +467,7 @@ public class AddUser extends javax.swing.JFrame {
         new UserDAO().addFunction(user);
         if(flag1 && flag2)
         {
+            admin.userButtonPressSom();
             super.dispose();
         }
         
