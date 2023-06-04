@@ -28,15 +28,17 @@ public class BookingDAO {
         }
     }
 
-    public void addBookingDAO(int userID, int itemID, String borrowDate, String borrowReturn) {
+    public void addBookingDAO(int BookingID, int userID, int itemID, String borrowDate, String borrowReturn, String status, int quantity) {
         try {
-            String query = "INSERT INTO bookings VALUES(?,?,?,?,?)";
+            String query = "INSERT INTO bookings VALUES(?,?,?,?,?,?,?)";
             prepStatement = conn.prepareStatement(query);
-            prepStatement.setInt(1, 1);
+            prepStatement.setInt(1, BookingID);
             prepStatement.setInt(2, userID);
             prepStatement.setInt(3, itemID);
-            prepStatement.setString(4, borrowDate);
-            prepStatement.setString(5, borrowReturn);
+            prepStatement.setInt(4, quantity);
+            prepStatement.setString(5, borrowDate);
+            prepStatement.setString(6, borrowReturn);
+            prepStatement.setString(7, status);
 
             prepStatement.executeUpdate();
         } catch (SQLException throwables) {
@@ -54,7 +56,27 @@ public class BookingDAO {
             e.printStackTrace();
         }
     }
-
+    
+    public void updateQuantity(int quantity, int itemID){
+        try {
+            String query = "Update bookings set quantity=" + quantity + " Where itemID=" + itemID;
+            prepStatement = conn.prepareStatement(query);
+            prepStatement.executeUpdate();
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+    
+    public void updateStatus(int bookingID, String status){
+        try {
+            String query = "Update bookings set status='" + status + "' Where bookingID=" + bookingID;
+            prepStatement = conn.prepareStatement(query);
+            prepStatement.executeUpdate();
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+    
     // Book table data set retrieval
     public ResultSet getBookings() {
         try {
@@ -92,6 +114,36 @@ public class BookingDAO {
             resultSet = statement.executeQuery(query);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+        }
+        return resultSet;
+    }
+    
+    public ResultSet getBookingsRowInfo(int requireID) {
+        try {
+            String query = "Select * from bookings where bookingID=" + requireID;
+            resultSet = statement.executeQuery(query);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return resultSet;
+    }
+    
+    public ResultSet getBookingsRowItemID(int requireID) {
+        try {
+            String query = "Select * from bookings where itemID=" + requireID;
+            resultSet = statement.executeQuery(query);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return resultSet;
+    }
+    
+    public ResultSet getLastRow() {
+        try {
+            String query = "Select * from bookings order by bookingID DESC LIMIT 1";
+            resultSet = statement.executeQuery(query);
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
         }
         return resultSet;
     }

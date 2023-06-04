@@ -59,11 +59,12 @@ public class ItemDAO {
     }
     public void addFunction(ItemDTO itemDTO) {
         try {
-            String query = "INSERT INTO items VALUES(null,?,?,?)";
+            String query = "INSERT INTO items VALUES(?,?,?,?)";
             prepStatement = conn.prepareStatement(query);
-            prepStatement.setString(1, itemDTO.getItemName());
-            prepStatement.setString(2, itemDTO.getCondition());
-            prepStatement.setInt(3, itemDTO.getQuantity());
+            prepStatement.setInt(1, itemDTO.getItemID());
+            prepStatement.setString(2, itemDTO.getItemName());
+            prepStatement.setString(3, itemDTO.getCondition());
+            prepStatement.setInt(4, itemDTO.getQuantity());
 
             prepStatement.executeUpdate();
         } catch (SQLException throwables) {
@@ -95,6 +96,16 @@ public class ItemDAO {
             prepStatement.executeUpdate();
 
             JOptionPane.showMessageDialog(null, "Item has been removed.");
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+    
+        public void updateQuantity(int quantity, int itemID){
+        try {
+            String query = "Update items set quantity=" + quantity + " Where itemID=" + itemID;
+            prepStatement = conn.prepareStatement(query);
+            prepStatement.executeUpdate();
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -141,7 +152,36 @@ public class ItemDAO {
         }
         return resultSet;
     }
-
+    
+    public ResultSet getLastRow() {
+        try {
+            String query = "Select * from items order by itemID DESC LIMIT 1";
+            resultSet = statement.executeQuery(query);
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+        return resultSet;
+    }
+    
+    public ResultSet getItemIDRow(int itemID) {
+        try {
+            String query = "Select * from items where itemID=" + itemID;
+            resultSet = statement.executeQuery(query);
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+        return resultSet;
+    }
+    
+    public ResultSet getUserIDRow(int userID) {
+        try {
+            String query = "Select * from items where itemID=" + userID;
+            resultSet = statement.executeQuery(query);
+        } catch (SQLException throwable) {
+            throwable.printStackTrace();
+        }
+        return resultSet;
+    }
 
     public DefaultTableModel buildTableModel(ResultSet resultSet) throws SQLException {
         ResultSetMetaData metaData = resultSet.getMetaData();

@@ -2,7 +2,7 @@ package com.sportsinventory.DTO;
 
 public class UserDTO {
     private int userID;
-    private String userName, name, email, password, regDate;
+    private String userName, name, email, password, regDate, cohort, major;
 
     public int getUserID() {
         return userID;
@@ -45,4 +45,16 @@ public class UserDTO {
     }
 
     public void setRegDate(String regDate) { this.regDate = regDate; }
+    
+    public String getCohort() {
+        return cohort;
+    }
+    
+    public void setCohort(String cohort) {this.cohort = cohort;}
+    
+    public String getMajor() {
+        return major;
+    }
+    
+    public void setMajor(String major) {this.major = major;}
 }

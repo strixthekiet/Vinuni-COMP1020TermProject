@@ -23,9 +23,9 @@ public class JavaJDBC {
     static PreparedStatement pst=null;
     static ResultSet rs=null;
     
-    static String url="jdbc:mysql://localhost:3306/inventoryforsports";
+    static String url="jdbc:mysql://localhost:3306/inventoryforsports?zeroDateTimeBehavior=CONVERT_TO_NULL";
     static String UserName="root";
-    static String password="Hbtchou123";
+    static String password="strix@1601";
     
     public static void main(String[] args) { 
         try {

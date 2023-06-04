@@ -25,19 +25,19 @@ public class UserDAO {
         }
     }
 
-    public void addUserDAO(UserDTO userDTO, String userType) {
+    public void addUserDAO(UserDTO userDTO) {
         try {
             String query = "SELECT * FROM users WHERE userName='" + userDTO.getUsername() + "'";
             resultSet = statement.executeQuery(query);
             if(resultSet.next())
                 JOptionPane.showMessageDialog(null, "User already exists");
             else
-                addFunction(userDTO, userType);
+                addFunction(userDTO);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
-    public void addFunction(UserDTO userDTO, String userType) {
+    public void addFunction(UserDTO userDTO) {
         try {
             String userid = null;
             String password = null;
@@ -45,8 +45,8 @@ public class UserDAO {
             String resQuery = "SELECT * FROM users";
             resultSet = statement.executeQuery(resQuery);
 
-            String query = "INSERT INTO users (userID,userName,name,email,password,regDate) " +
-                    "VALUES(?,?,?,?,?,?)";
+            String query = "INSERT INTO users (userID,userName,fullname,email,password,regDate,cohort,major) " +
+                    "VALUES(?,?,?,?,?,?,?,?)";
             prepStatement = conn.prepareStatement(query);
             prepStatement.setInt(1, userDTO.getUserID());
             prepStatement.setString(2, userDTO.getUsername());
@@ -54,6 +54,8 @@ public class UserDAO {
             prepStatement.setString(4, userDTO.getEmail());
             prepStatement.setString(5, userDTO.getPassword());
             prepStatement.setString(6, userDTO.getRegDate());
+            prepStatement.setString(7, userDTO.getCohort());
+            prepStatement.setString(8, userDTO.getMajor());
             prepStatement.executeUpdate();
 
         } catch (Exception ex){
@@ -101,6 +103,16 @@ public class UserDAO {
     public ResultSet getUserDAO(String userName) {
         try {
             String query = "SELECT * FROM users WHERE userName='" +userName+ "'";
+            resultSet = statement.executeQuery(query);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return resultSet;
+    }
+    
+    public ResultSet getUserInfo(int ID) {
+        try {
+            String query = "SELECT * FROM users WHERE userID=" +ID;
             resultSet = statement.executeQuery(query);
         } catch (SQLException ex) {
             ex.printStackTrace();

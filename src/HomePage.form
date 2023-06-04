@@ -75,8 +75,8 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="username" min="-2" pref="120" max="-2" attributes="0"/>
-                          <Component id="password" pref="0" max="32767" attributes="0"/>
+                          <Component id="usernameText" min="-2" pref="120" max="-2" attributes="0"/>
+                          <Component id="passwordText" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace pref="41" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -100,12 +100,12 @@
                           <Component id="usernameField" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
-                              <Component id="username" max="32767" attributes="0"/>
+                              <Component id="usernameText" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="password" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="passwordText" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="passwordFIeld" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
@@ -116,7 +116,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="username">
+            <Component class="javax.swing.JLabel" name="usernameText">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Helvetica Neue" size="18" style="0"/>
@@ -136,7 +136,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JLabel" name="password">
+            <Component class="javax.swing.JLabel" name="passwordText">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Helvetica Neue" size="18" style="0"/>

@@ -42,25 +42,59 @@ public class AdminMainPage extends javax.swing.JFrame {
         initComponents();
         times();
         dt();
-        
-        // tbh 
-        // basically copy and paste everything inside the homeButtonMousePressed function here to initialize, do this after finish that function
-        
-        
     }
     
     public AdminMainPage(String _adminName, String _adminDescript) {
         initComponents();
+        times();
+        dt();
         setColor(homeButton); 
+        ind_1.setOpaque(true);
+        resetColor(new JPanel[]{usersButton,inventoryButton}, new JPanel[]{ind_3, ind_4});
         
         adminName.setText(_adminName);
         adminTitle.setText(_adminDescript);
         
-        ind_1.setOpaque(true);
-        resetColor(new JPanel[]{usersButton,inventoryButton}, new JPanel[]{ind_3, ind_4});
-        jobButton.setForeground(Color.orange);
-        times();
-        dt();
+        // change button
+        jobButton.setText("Email Selected User");
+        jobButton.setForeground(Color.blue);
+        
+        // change table
+        DefaultTableModel model = new DefaultTableModel();
+
+        String[] columnNames =  {"Booking ID", "User ID", "Item ID", "Quantity", "Borrow Date", "Return Date", "Status"};
+        model.setColumnIdentifiers(columnNames);
+        
+        ResultSet resultSet = new BookingDAO().getBookingsTable();
+        
+        // tbh
+        // retrieve the current items bookings and add to the rows
+        try {
+            while (resultSet.next()) {
+                Object[] rowData = {
+                    resultSet.getInt("bookingID"),
+                    resultSet.getInt("userID"),
+                    resultSet.getInt("itemID"),
+                    resultSet.getInt("Quantity"),
+                    resultSet.getDate("borrowDate"),
+                    resultSet.getDate("borrowReturn"),
+                    resultSet.getString("status")
+                };
+                model.addRow(rowData);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminMainPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            // Close the result set and statement
+            resultSet.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminMainPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        // Set the table model
+        mainTable.setModel(model);
     }
     
     public void dt()
@@ -116,17 +150,17 @@ public class AdminMainPage extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         topPane = new javax.swing.JPanel();
         searchText = new javax.swing.JTextField();
-        dayLabel = new javax.swing.JLabel();
-        dateLabel = new javax.swing.JLabel();
-        timeLabel = new javax.swing.JLabel();
         searchButton = new javax.swing.JButton();
+        mainTableLabel = new javax.swing.JLabel();
         infoPane = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         adminName = new javax.swing.JLabel();
         adminTitle = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
         jobButton = new javax.swing.JButton();
+        timeLabel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        dayLabel = new javax.swing.JLabel();
+        dateLabel = new javax.swing.JLabel();
         tablePane = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         mainTable = new javax.swing.JTable();
@@ -308,21 +342,6 @@ public class AdminMainPage extends javax.swing.JFrame {
             }
         });
 
-        dayLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        dayLabel.setForeground(new java.awt.Color(255, 255, 255));
-        dayLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        dayLabel.setText("day");
-
-        dateLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
-        dateLabel.setForeground(new java.awt.Color(255, 255, 255));
-        dateLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        dateLabel.setText("date");
-
-        timeLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 36)); // NOI18N
-        timeLabel.setForeground(new java.awt.Color(255, 255, 255));
-        timeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        timeLabel.setText("time");
-
         searchButton.setBackground(new java.awt.Color(51, 204, 0));
         searchButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/swing/images/icons8_Search_18px.png"))); // NOI18N
         searchButton.setBorderPainted(false);
@@ -334,17 +353,19 @@ public class AdminMainPage extends javax.swing.JFrame {
             }
         });
 
+        mainTableLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        mainTableLabel.setForeground(new java.awt.Color(255, 255, 255));
+        mainTableLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        mainTableLabel.setText("Current Bookings");
+
         javax.swing.GroupLayout topPaneLayout = new javax.swing.GroupLayout(topPane);
         topPane.setLayout(topPaneLayout);
         topPaneLayout.setHorizontalGroup(
             topPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topPaneLayout.createSequentialGroup()
-                .addComponent(dayLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(dateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(timeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
-                .addGap(36, 36, 36)
+                .addContainerGap(217, Short.MAX_VALUE)
+                .addComponent(mainTableLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(199, 199, 199)
                 .addComponent(searchText, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -352,19 +373,12 @@ public class AdminMainPage extends javax.swing.JFrame {
         topPaneLayout.setVerticalGroup(
             topPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topPaneLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(searchText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topPaneLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(topPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap()
+                .addGroup(topPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(topPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(timeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGroup(topPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(dayLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap())
+                    .addComponent(mainTableLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchText, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(topPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 0, 840, 50));
@@ -377,21 +391,12 @@ public class AdminMainPage extends javax.swing.JFrame {
         adminName.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         adminName.setForeground(new java.awt.Color(255, 255, 255));
         adminName.setText("PT. Nguyen Hoang");
-        jPanel4.add(adminName, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 300, 30));
+        jPanel4.add(adminName, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 260, 30));
 
         adminTitle.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         adminTitle.setForeground(new java.awt.Color(255, 255, 255));
         adminTitle.setText("SPR2023 - VCOR1022 Coach");
         jPanel4.add(adminTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, -1, -1));
-
-        StyledDocument doc = jTextPane1.getStyledDocument();
-        SimpleAttributeSet center = new SimpleAttributeSet();
-        StyleConstants.setAlignment(center, StyleConstants.ALIGN_CENTER);
-        doc.setParagraphAttributes(0, doc.getLength(), center, false);
-        jTextPane1.setEditable(false);
-        jTextPane1.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
-        jTextPane1.setText("1. \nBadminton Racket\nLate: 3 days 2 hours\nNguyen Don The Kiet \n\n2.\nBadminton Racket\nLate: 3 days 2 hours\nNguyen Don The Kiet\n\n3.\nBadminton Racket\nLate: 3 days 2 hours\nNguyen Don The Kiet \n");
-        jScrollPane3.setViewportView(jTextPane1);
 
         jobButton.setText("Email Selected Users");
         jobButton.addActionListener(new java.awt.event.ActionListener() {
@@ -400,35 +405,62 @@ public class AdminMainPage extends javax.swing.JFrame {
             }
         });
 
+        timeLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 48)); // NOI18N
+        timeLabel.setForeground(new java.awt.Color(255, 255, 255));
+        timeLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        timeLabel.setText("time");
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Resources/logoTransparent_1.png"))); // NOI18N
+
+        dayLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        dayLabel.setForeground(new java.awt.Color(255, 255, 255));
+        dayLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        dayLabel.setText("day");
+
+        dateLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
+        dateLabel.setForeground(new java.awt.Color(255, 255, 255));
+        dateLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        dateLabel.setText("date");
+
         javax.swing.GroupLayout infoPaneLayout = new javax.swing.GroupLayout(infoPane);
         infoPane.setLayout(infoPaneLayout);
         infoPaneLayout.setHorizontalGroup(
             infoPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(infoPaneLayout.createSequentialGroup()
                 .addGroup(infoPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(infoPaneLayout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jobButton, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(infoPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(infoPaneLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(14, Short.MAX_VALUE)))
+                        .addComponent(dayLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(dateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(infoPaneLayout.createSequentialGroup()
+                        .addGroup(infoPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(infoPaneLayout.createSequentialGroup()
+                                .addGap(42, 42, 42)
+                                .addGroup(infoPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jobButton, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(infoPaneLayout.createSequentialGroup()
+                                        .addGap(14, 14, 14)
+                                        .addComponent(jLabel1)))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(timeLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         infoPaneLayout.setVerticalGroup(
             infoPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(infoPaneLayout.createSequentialGroup()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 348, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addGroup(infoPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dayLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(timeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
                 .addComponent(jobButton, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(infoPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(infoPaneLayout.createSequentialGroup()
-                    .addGap(97, 97, 97)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(65, Short.MAX_VALUE)))
+                .addGap(15, 15, 15))
         );
 
         getContentPane().add(infoPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 50, 260, 490));
@@ -493,6 +525,9 @@ public class AdminMainPage extends javax.swing.JFrame {
             }
         });
         mainTable.setGridColor(new java.awt.Color(255, 255, 255));
+        mainTable.setMaximumSize(new java.awt.Dimension(568, 490));
+        mainTable.setMinimumSize(new java.awt.Dimension(568, 490));
+        mainTable.setPreferredSize(new java.awt.Dimension(568, 490));
         mainTable.setRowHeight(30);
         mainTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(mainTable);
@@ -523,18 +558,22 @@ public class AdminMainPage extends javax.swing.JFrame {
 
     private void homeButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeButtonMousePressed
         // TODO add your handling code here:
+        homeButtonPressSom();
+    }//GEN-LAST:event_homeButtonMousePressed
+    
+    public void homeButtonPressSom() {
         setColor(homeButton); 
         ind_1.setOpaque(true);
         resetColor(new JPanel[]{usersButton,inventoryButton}, new JPanel[]{ind_3, ind_4});
         
         // change button
-        jobButton.setText("Notify Selected Users");
+        jobButton.setText("Email Selected User");
         jobButton.setForeground(Color.blue);
-        
+        mainTableLabel.setText("Current Bookings");
         // change table
         DefaultTableModel model = new DefaultTableModel();
 
-        String[] columnNames =  {"Booking ID", "User ID", "Item ID", "Quantity", "Borrow Date", "Return Date"};
+        String[] columnNames =  {"Booking ID", "User ID", "Item ID", "Quantity", "Borrow Date", "Return Date", "Status"};
         model.setColumnIdentifiers(columnNames);
         
         ResultSet resultSet = new BookingDAO().getBookingsTable();
@@ -549,7 +588,8 @@ public class AdminMainPage extends javax.swing.JFrame {
                     resultSet.getInt("itemID"),
                     resultSet.getInt("Quantity"),
                     resultSet.getDate("borrowDate"),
-                    resultSet.getDate("borrowReturn")
+                    resultSet.getDate("borrowReturn"),
+                    resultSet.getString("status")
                 };
                 model.addRow(rowData);
             }
@@ -566,17 +606,21 @@ public class AdminMainPage extends javax.swing.JFrame {
         
         // Set the table model
         mainTable.setModel(model);
-    }//GEN-LAST:event_homeButtonMousePressed
-
+    }
+    
     private void usersButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_usersButtonMousePressed
         // TODO add your handling code here:
-         setColor(usersButton); 
+        userButtonPressSom();
+    }//GEN-LAST:event_usersButtonMousePressed
+    
+    public void userButtonPressSom() {
+        setColor(usersButton); 
         ind_3.setOpaque(true);
         resetColor(new JPanel[]{homeButton,inventoryButton}, new JPanel[]{ind_1, ind_4});
         // change button
         jobButton.setText("Add New User");
         jobButton.setForeground(Color.orange);
-        
+        mainTableLabel.setText("All Users");
         // change table
         DefaultTableModel model = new DefaultTableModel();
 
@@ -612,10 +656,14 @@ public class AdminMainPage extends javax.swing.JFrame {
         
         // Set the table model
         mainTable.setModel(model);
-    }//GEN-LAST:event_usersButtonMousePressed
-
+    }
+    
     private void inventoryButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inventoryButtonMousePressed
         // TODO add your handling code here:
+        inventoryButtonPressSom();
+    }//GEN-LAST:event_inventoryButtonMousePressed
+    
+    public void inventoryButtonPressSom() {
         setColor(inventoryButton); 
         ind_4.setOpaque(true);
         resetColor(new JPanel[]{usersButton,homeButton}, new JPanel[]{ind_3, ind_1});
@@ -623,7 +671,7 @@ public class AdminMainPage extends javax.swing.JFrame {
         // change button
         jobButton.setText("Add New Item"); // only delete the onces not in use
         jobButton.setForeground(Color.red);
-        
+        mainTableLabel.setText("Available Items");
         // change table
         DefaultTableModel model = new DefaultTableModel();
 
@@ -658,8 +706,8 @@ public class AdminMainPage extends javax.swing.JFrame {
         
         // Set the table model
         mainTable.setModel(model);
-    }//GEN-LAST:event_inventoryButtonMousePressed
-
+    }
+    
     int xx,xy;
     private void topPaneMousePressed(java.awt.event.MouseEvent evt) {     
         // TODO add your handling code here:
@@ -699,8 +747,7 @@ public class AdminMainPage extends javax.swing.JFrame {
         // TODO add your handling code here:
         switch(jobButton.getText())
         {
-            
-            case "Email Selected Users" -> 
+            case "Email Selected User" -> 
             {
                 int rowSelected = mainTable.getSelectedRow();
                 
@@ -710,24 +757,44 @@ public class AdminMainPage extends javax.swing.JFrame {
                 }
                 try 
                 {
-                    String bookingID = "1";  //get from selected row
+                    int rowSelect = mainTable.getSelectedRow();
+                    String bookingID = mainTable.getValueAt(rowSelect, 0).toString();  //get from selected row
+                   
                     // get from db
+                    
+                    ResultSet rs = new BookingDAO().getBookingsRowInfo(Integer.parseInt(bookingID));
+                    
                     String borrowDate = "";
                     String returnDate = "";
                     int quantity = 1;
-                    String userID = "";
-                    String itemCondition= "";
+                    int userID = 0;
+                    String itemCondition= "good";
                     
-                    //get username form userID
+                    try {
+                        if (rs.next()) {
+                            borrowDate = rs.getDate("borrowDate").toString();
+                            returnDate = rs.getDate("borrowReturn").toString();
+                            quantity = rs.getInt("quantity");
+                            userID = rs.getInt("userID");
+                        }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(AdminMainPage.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    ResultSet rs2 = new UserDAO().getUserInfo(userID);
                     String studentName = "";
-                    //Get email from userID
                     String email = "email1@example.com";
-                    //get student id from userID
-                    String studentID = "V";
+                    String studentID = "V" + userID;
                     
-
-
-
+                    try {
+                        if (rs2.next()) {
+                            studentName = rs2.getString("fullname");
+                            email = rs2.getString("email");
+                        }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(AdminMainPage.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
                     itemCondition = itemCondition.replaceAll("%", "%25");
                     
                     String subject = "Late Return Notice - Booking ID " + bookingID;
@@ -755,12 +822,22 @@ public class AdminMainPage extends javax.swing.JFrame {
             }
             case "Add New User" -> 
             {
-                AddUser ad = new AddUser();
+                AddUser ad = new AddUser(this);
                 ad.setVisible(true);
             }
             case "Add New Item" -> 
             {
-                AddItem it = new AddItem();
+                int lastID = 0;
+                ResultSet rs = new ItemDAO().getLastRow();
+                try{ 
+                    if (rs.next())
+                        lastID = rs.getInt("itemID");
+                } catch (SQLException ex) {
+                    Logger.getLogger(AdminMainPage.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                
+                AddItem it = new AddItem(lastID + 1, this);
                 it.setVisible(true);
             }
             default -> {
@@ -834,15 +911,15 @@ public class AdminMainPage extends javax.swing.JFrame {
     private javax.swing.JPanel ind_4;
     private javax.swing.JPanel infoPane;
     private javax.swing.JPanel inventoryButton;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextPane jTextPane1;
     private javax.swing.JButton jobButton;
     private javax.swing.JTable mainTable;
+    private javax.swing.JLabel mainTableLabel;
     private javax.swing.JButton searchButton;
     private javax.swing.JTextField searchText;
     private javax.swing.JPanel side_pane;
