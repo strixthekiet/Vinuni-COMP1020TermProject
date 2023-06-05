@@ -1,8 +1,36 @@
 # VinEquip
-
+![VinEquipLogo](/src/Resources/logoTransparent_1.png)
 ## Description
 
 VinEquip is a desktop-based application designed to provide a convenient and user-friendly way for university students, faculty, and staff to book sports equipment such as rackets and balls.
+
+## Prerequisites
+Before you begin, make sure you have the following prerequisites installed on your system:
+
+Java Development Kit (JDK) 8 or later
+NetBeans IDE
+
+### Installation Steps
+1.  Clone [this repository](https://github.com/strixthekiet/Vinuni-COMP1020TermProject) to your local machine using the following command:
+```shell
+git clone https://github.com/strixthekiet/Vinuni-COMP1020TermProject
+```
+2. Launch NetBeans IDE and open the project by selecting "File" > "Open Project" and navigating to the cloned repository's directory.
+
+3. Once the project is open, you may need to resolve any missing dependencies. Right-click on the project in the "Projects" pane and select "Resolve Project Problems". Follow the prompts to install any required libraries or dependencies. This includes
+    - [JCalendar 1.4](ter.com/jcalendar)
+
+4. Next, configure the project settings. Right-click on the project and select "Properties". In the properties window, navigate to the "Run" category.
+
+5. In the "Main Class" field, ensure that the correct main class is selected (usually the class with the "main" method).
+
+6. Establish database connection, run your MySQL server. Natigate to "src/Database/JavaJDBC.java" and edit the username and password to your MySQL user.
+
+7. By pressing the "F6" key, run the project.
+    - To log in as user, the sample user account is "hung" "hung".
+    - To log in as admin, the sample admin account is "tri" "tri". 
+
+
 
 ## Features
 
