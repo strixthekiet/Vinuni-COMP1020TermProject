@@ -58,7 +58,8 @@ CREATE TABLE `bookings` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 LOCK TABLES `bookings` WRITE;
-INSERT INTO `bookings` VALUES (1, 202200668, 101, 1, '2023-05-29', '2023-05-31', 'borrowing');
+INSERT INTO `bookings` VALUES (1, 202200668, 101, 1, '2023-05-29', '2023-05-31', 'borrowing'),
+								(20200000,'wong.ks','Kok Seng Wong','22wong.ks@vinuni.edu.vn','wong.ks','2023-06-07','CECS Professor');
 UNLOCK TABLES;
 
 

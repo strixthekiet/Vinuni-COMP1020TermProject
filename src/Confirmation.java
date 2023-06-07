@@ -82,7 +82,6 @@ public class Confirmation extends javax.swing.JFrame {
         dateChooser = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(400, 300));
         setMinimumSize(new java.awt.Dimension(400, 300));
         setResizable(false);
         setSize(new java.awt.Dimension(400, 300));
@@ -314,8 +313,6 @@ public class Confirmation extends javax.swing.JFrame {
         ItemIDLabel.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         ItemIDLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ItemIDLabel.setText("ID from DB");
-
-        dateChooser.setBackground(new java.awt.Color(102, 255, 102));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);

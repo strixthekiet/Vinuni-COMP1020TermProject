@@ -52,7 +52,7 @@ public class JavaJDBC {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(url, UserName, password);
-            System.out.println("Connected successfully.");
+            //System.out.println("Connected successfully.");
         } catch (Exception e) {
             e.printStackTrace();
         }
